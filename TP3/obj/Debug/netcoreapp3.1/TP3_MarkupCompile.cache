@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Mathias\Desktop\TP3\TP3\obj\Debug\netcoreapp3.1\
+C:\Users\xpaqu\OneDrive\Documents\20-2-Automne\Application interactive\TP3\TP3_ANNO_1750\TP3\obj\Debug\netcoreapp3.1\
 TP3
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-C:\Users\Mathias\Desktop\TP3\TP3\App.xaml
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+C:\Users\xpaqu\OneDrive\Documents\20-2-Automne\Application interactive\TP3\TP3_ANNO_1750\TP3\App.xaml
 61632262063
 3-1043142790
-10282349024
+11-325417782
 1921654412462
 MainWindow.xaml;Views\AffichageArgent.xaml;Views\BateauPirate.xaml;Views\InterfaceAbordage.xaml;Views\InterfaceTir.xaml;Views\Port.xaml;
 
-False
+True
 

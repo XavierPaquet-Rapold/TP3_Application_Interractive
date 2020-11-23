@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mathias\\Desktop\\TP3\\TP3\\TP3.csproj": {}
+    "C:\\Users\\xpaqu\\OneDrive\\Documents\\20-2-Automne\\Application interactive\\TP3\\TP3_ANNO_1750\\TP3\\TP3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mathias\\Desktop\\TP3\\TP3\\TP3.csproj": {
+    "C:\\Users\\xpaqu\\OneDrive\\Documents\\20-2-Automne\\Application interactive\\TP3\\TP3_ANNO_1750\\TP3\\TP3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mathias\\Desktop\\TP3\\TP3\\TP3.csproj",
+        "projectUniqueName": "C:\\Users\\xpaqu\\OneDrive\\Documents\\20-2-Automne\\Application interactive\\TP3\\TP3_ANNO_1750\\TP3\\TP3.csproj",
         "projectName": "TP3",
-        "projectPath": "C:\\Users\\Mathias\\Desktop\\TP3\\TP3\\TP3.csproj",
-        "packagesPath": "C:\\Users\\Mathias\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mathias\\Desktop\\TP3\\TP3\\obj\\",
+        "projectPath": "C:\\Users\\xpaqu\\OneDrive\\Documents\\20-2-Automne\\Application interactive\\TP3\\TP3_ANNO_1750\\TP3\\TP3.csproj",
+        "packagesPath": "C:\\Users\\xpaqu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\xpaqu\\OneDrive\\Documents\\20-2-Automne\\Application interactive\\TP3\\TP3_ANNO_1750\\TP3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mathias\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\xpaqu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -57,7 +55,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
