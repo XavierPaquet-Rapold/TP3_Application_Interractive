@@ -10,21 +10,21 @@
         /// <summary>Contient le nombre d'equipage du navire lors de sa creation</summary>
         public int NombreEquipageMax { get; internal set; }
         /// <summary>Contient le nombre d'equipage restant apres les attaques</summary>
-        public int NombreEquipageCourant { get; internal set; }
+        public int NombreEquipageCourant { get; private set; }
         /// <summary>Contient la vie de la coque du navire lors de sa creation</summary>
-        public int VieCoqueMax { get; internal set; }
+        public int VieCoqueMax { get; private set; }
         /// <summary>Contient la vie de la coque restant apres les attaques</summary>
-        public int VieCoqueCourant { get; internal set; }
+        public int VieCoqueCourant { get; private set; }
         /// <summary>Contient la vitesse maximale actuelle du navire a tout moment de la partie</summary>
-        public int VitesseNavire { get; internal set; }
+        public double VitesseNavire { get; private set; }
         /// <summary>Contient la vitesse de recharge maximale actuelle du navire a tout moment de la partie</summary>
-        public int VitesseRecharge { get; internal set; }
+        public int VitesseRecharge { get; private set; }
         /// <summary>Contient le nombre d'or actuel du navire a tout moment de la partie</summary>
-        public int NbOr { get; internal set; }
+        public int NbOr { get; private set; }
         /// <summary>Contient le nombre de canons a l'arriere du navire</summary>
-        public int NbCanonArriere { get; internal set; }
+        public int NbCanonArriere { get; private set; }
         /// <summary>Contient le nombre de canons sur les cotes du navire</summary>
-        public int NbCanonCote { get; internal set; }
+        public int NbCanonCote { get; private set; }
 
         #endregion
 
@@ -40,7 +40,7 @@
         /// <param name="nbOr">le nombre d'or contenu dans le navire</param>
         /// <param name="nombreCanonArriere">le nombre de canons a l'arriere du navire</param>
         /// <param name="nbCanonCote">le nombre de canons sur le cote du navire</param>
-        public Navire(int equipage, int coque, int vitesse, int vitesseRecharge, int nbOr, int nombreCanonArriere = 0, int nbCanonCote = 0)
+        public Navire(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int nombreCanonArriere = 0, int nbCanonCote = 0)
         {
             NombreEquipageMax = equipage;
             NombreEquipageCourant = equipage;
@@ -91,7 +91,7 @@
                 VieCoqueCourant = 0;
             }
             NombreEquipageCourant -= viePerdu / 2;
-            if(NombreEquipageCourant < 0)
+            if (NombreEquipageCourant < 0)
             {
                 NombreEquipageCourant = 0;
             }
@@ -107,7 +107,7 @@
         public void DegatsCoque(int viePerdu)
         {
             VieCoqueCourant -= viePerdu;
-            if(VieCoqueCourant < 0)
+            if (VieCoqueCourant < 0)
             {
                 VieCoqueCourant = 0;
             }
@@ -122,7 +122,7 @@
         public int UtilisationOr(uint orUtilise)
         {
             NbOr -= (int)orUtilise;
-            if(NbOr < 0)
+            if (NbOr < 0)
             {
                 NbOr = 0;
             }
