@@ -8,21 +8,26 @@
 
   <ItemGroup>
     <None Remove="Models\NewFile1.txt" />
-    <None Remove="Views\Images\bateau_pirate.png" />
+    <None Remove="Views\Images\bateau_pirate_v2.png" />
+    <None Remove="Views\Images\bateau_pirate_v3.png" />
+    <None Remove="Views\Images\boulets.png" />
     <None Remove="Views\Images\or.png" />
     <None Remove="Views\Images\port.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Views\Images\bateau_pirate_v3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\boulets.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Images\or.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\Images\bateau_pirate.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Images\port.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

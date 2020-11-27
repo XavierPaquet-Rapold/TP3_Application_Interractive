@@ -36,32 +36,30 @@ namespace TP3.Views
             {
                 VelociteX -= 0.2;
             }
-            AngleDirection();
         }
 
-        public void AngleDirection()
+        public double CalculerAngle()
         {
             double angle = 0;
 
             if(VelociteX > 0 && VelociteY >= 0)
             {
-                angle = 180 + Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
+                angle = 90 + Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
             } else if(VelociteX >= 0 && VelociteY < 0)
             {
-                angle = 90 - Math.Round(Math.Atan(VelociteX / VelociteY) * 180 / Math.PI);
+                angle = - Math.Round(Math.Atan(VelociteX / VelociteY) * 180 / Math.PI);
             } else if(VelociteX <= 0 && VelociteY > 0)
             {
-                angle = -90 - Math.Round(Math.Atan(VelociteX / VelociteY) * 180 / Math.PI);
+                angle = 180 - Math.Round(Math.Atan(VelociteX / VelociteY) * 180 / Math.PI);
             } else if(VelociteX < 0 && VelociteY <= 0)
             {
-                angle = Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
+                angle = 270 + Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
             } else
             {
-                angle = 90;
+                angle = 0;
             }
 
-            var rotationAnimation = new DoubleAnimation(angle, TimeSpan.FromSeconds(1));
-            RotationImage.BeginAnimation(RotateTransform.AngleProperty, rotationAnimation);
+            return angle;
         }
 
         public void StopX()

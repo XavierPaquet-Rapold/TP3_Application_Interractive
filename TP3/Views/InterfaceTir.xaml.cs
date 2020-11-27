@@ -15,6 +15,9 @@ namespace TP3.Views
         private DispatcherTimer _horlogeDroite;
         private DispatcherTimer _horlogeGauche;
 
+        public bool TirDroitActif = false;
+        public bool TirGaucheActif = false;
+
         public InterfaceTir()
         {
             InitializeComponent();
@@ -46,11 +49,13 @@ namespace TP3.Views
         private void TirGauche_Click(object sender, RoutedEventArgs e)
         {
             Rechargement(TirGauche);
+            TirGaucheActif = true;
         }
 
         private void Tirdroite_Click(object sender, RoutedEventArgs e)
         {
             Rechargement(TirDroite);
+            TirDroitActif = true;
         }
 
         private void Rechargement(Button bouton)
