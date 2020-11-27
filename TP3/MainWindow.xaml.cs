@@ -1,34 +1,66 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TP3.Models;
+using TP3.Views;
 
 namespace TP3
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : INotifyPropertyChanged
     {
         private DispatcherTimer _horloge;
+
+        private double _angleBateau;
+        public double AngleBateau
+        {
+            get { return _angleBateau; }
+            set
+            {
+                if(_angleBateau != value)
+                {
+                    _angleBateau = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
             _horloge = new DispatcherTimer();
             _horloge.Interval = TimeSpan.FromMilliseconds(20);
             _horloge.IsEnabled = true;
             _horloge.Tick += HorlogeAvance;
             _horloge.Start();
+            BateauPirate.Background = Brushes.Black;
         }
 
         private void HorlogeAvance(object sender, EventArgs e)
         {
-            DeplacerVaisseau();
-            VerifierCollision();
+            DeplacerBateau();
+            AnglerBateau();
+            VerifierCollisionJoueurPort();
+            VerifierTir();
+            DeplacerTir();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -73,7 +105,7 @@ namespace TP3
             }
         }
 
-        private void DeplacerVaisseau()
+        private void DeplacerBateau()
         {
             double nextX = Canvas.GetLeft(BateauPirate) + BateauPirate.VelociteX;
             if (nextX < 0)
@@ -102,17 +134,82 @@ namespace TP3
             Canvas.SetTop(BateauPirate, nextY);
         }
 
-        private void VerifierCollision()
+        private void AnglerBateau()
+        {
+            AngleBateau = BateauPirate.CalculerAngle();
+        }
+
+        private void VerifierCollisionJoueurPort()
         {
             Rect HitBoxJoueur = new Rect(Canvas.GetLeft(BateauPirate), Canvas.GetTop(BateauPirate), BateauPirate.ActualWidth, BateauPirate.ActualHeight);
             Rect HitBoxPort = new Rect(Canvas.GetLeft(Port), Canvas.GetTop(Port), Port.ActualWidth, Port.ActualHeight);
+            
 
             if(HitBoxJoueur.IntersectsWith(HitBoxPort))
             {
-                Port.Background = Brushes.Gray;
-            } else
+                _horloge.Stop();
+                OuvrirFenetreBoutique();
+            } 
+        }
+
+        private void DeplacerBoulets(BouletsCanon x)
+        {
+            double nextX = Canvas.GetLeft(x) + x.VelociteX;
+            Canvas.SetLeft(x, nextX);
+
+            double nextY = Canvas.GetTop(x) + x.VelociteY;
+            Canvas.SetTop(x, nextY);
+        }
+
+        private void VerifierTir()
+        {
+            if(BoutonsTirer.TirDroitActif)
             {
-                Port.Background = Brushes.Transparent;
+                BoutonsTirer.TirDroitActif = false;
+
+                BouletsCanon tir = new BouletsCanon();
+                Canvas.SetLeft(tir, (Canvas.GetLeft(BateauPirate)));
+                Canvas.SetTop(tir, Canvas.GetTop(BateauPirate));
+
+                tir.CalculerDirection(BateauPirate.VelociteX, BateauPirate.VelociteY, true);
+                tir.CalculerAngle();
+                tir.Tag = "tirDroit";
+                Mer.Children.Add(tir);
+            } else if(BoutonsTirer.TirGaucheActif) 
+            {
+                BoutonsTirer.TirGaucheActif = false;
+
+                BouletsCanon tir = new BouletsCanon();
+                Canvas.SetLeft(tir, Canvas.GetLeft(BateauPirate) - BateauPirate.ActualWidth);
+                Canvas.SetTop(tir, Canvas.GetTop(BateauPirate));
+
+                tir.CalculerDirection(BateauPirate.VelociteX, BateauPirate.VelociteY, false);
+                tir.CalculerAngle();
+                tir.Tag = "tirGauche";
+                Mer.Children.Add(tir);
+            }
+        }
+
+        private void OuvrirFenetreBoutique()
+        {
+            FenetreBoutique boutique = new FenetreBoutique();
+            boutique.Show();
+            boutique.Closing += fermerFenetre();
+        }
+
+        private CancelEventHandler fermerFenetre()
+        {
+            Canvas.SetLeft(BateauPirate, 500);
+            Canvas.SetTop(BateauPirate, 500);
+            _horloge.Start();
+            return null;
+        }
+
+        public void DeplacerTir()
+        {
+            foreach (var x in Mer.Children.OfType<BouletsCanon>())
+            {
+                DeplacerBoulets(x);
             }
         }
     }

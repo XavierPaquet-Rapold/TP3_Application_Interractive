@@ -13,6 +13,15 @@
     <Compile Update="Views\BateauPirate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\BouletsCanon.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FenetreBoutique.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GalionEspagnole.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\InterfaceAbordage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +40,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\BateauPirate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BouletsCanon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FenetreBoutique.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GalionEspagnole.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\InterfaceAbordage.xaml">

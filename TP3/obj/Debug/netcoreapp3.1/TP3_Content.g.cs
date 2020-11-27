@@ -8,8 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/images/bateau_pirate_v3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/images/boulets.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/images/or.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/images/bateau_pirate.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/images/port.png")]
 
 
