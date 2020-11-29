@@ -8,11 +8,19 @@
 
   <ItemGroup>
     <None Remove="Models\NewFile1.txt" />
+    <None Remove="Views\Images\armure.png" />
     <None Remove="Views\Images\bateau_pirate_v2.png" />
     <None Remove="Views\Images\bateau_pirate_v3.png" />
     <None Remove="Views\Images\boulets.png" />
+    <None Remove="Views\Images\cadence.png" />
+    <None Remove="Views\Images\canon.png" />
+    <None Remove="Views\Images\degat.png" />
+    <None Remove="Views\Images\galion_espagnole.png" />
     <None Remove="Views\Images\or.png" />
     <None Remove="Views\Images\port.png" />
+    <None Remove="Views\Images\recruter.png" />
+    <None Remove="Views\Images\reparer.png" />
+    <None Remove="Views\Images\vitesse.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +30,15 @@
     <Content Include="Views\Images\boulets.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Images\canon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\degat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\galion_espagnole.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Images\or.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -29,6 +46,21 @@
 
   <ItemGroup>
     <Content Include="Views\Images\port.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Images\armure.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\recruter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\reparer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\vitesse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

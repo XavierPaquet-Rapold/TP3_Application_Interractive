@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TP3.Views"
         mc:Ignorable="d"
-        Title="FenetreBoutique" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="FenetreBoutique" MinHeight="540" MinWidth="1540">
+
+    <Canvas x:Name="Fenetre" Background="#765225"/>
 </Window>

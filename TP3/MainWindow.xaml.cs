@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 using TP3.Models;
 using TP3.Views;
@@ -18,6 +17,19 @@ namespace TP3
     public partial class MainWindow : INotifyPropertyChanged
     {
         private DispatcherTimer _horloge;
+
+        private Rect HitBoxJoueur
+        {
+            get { return new Rect(Canvas.GetLeft(BateauPirate), Canvas.GetTop(BateauPirate), BateauPirate.ActualWidth, BateauPirate.ActualHeight); }
+        }
+
+        private Rect HitBoxPort
+        {
+            get
+            {
+                return new Rect(Canvas.GetLeft(Port), Canvas.GetTop(Port), Port.ActualWidth, Port.ActualHeight);
+            }
+        }
 
         private double _angleBateau;
         public double AngleBateau
@@ -51,7 +63,6 @@ namespace TP3
             _horloge.IsEnabled = true;
             _horloge.Tick += HorlogeAvance;
             _horloge.Start();
-            BateauPirate.Background = Brushes.Black;
         }
 
         private void HorlogeAvance(object sender, EventArgs e)
@@ -59,6 +70,7 @@ namespace TP3
             DeplacerBateau();
             AnglerBateau();
             VerifierCollisionJoueurPort();
+            VerifierCollisionBouletsJoueur();
             VerifierTir();
             DeplacerTir();
         }
@@ -141,16 +153,26 @@ namespace TP3
 
         private void VerifierCollisionJoueurPort()
         {
-            Rect HitBoxJoueur = new Rect(Canvas.GetLeft(BateauPirate), Canvas.GetTop(BateauPirate), BateauPirate.ActualWidth, BateauPirate.ActualHeight);
-            Rect HitBoxPort = new Rect(Canvas.GetLeft(Port), Canvas.GetTop(Port), Port.ActualWidth, Port.ActualHeight);
-            
-
             if(HitBoxJoueur.IntersectsWith(HitBoxPort))
             {
                 _horloge.Stop();
                 OuvrirFenetreBoutique();
             } 
         }
+
+        private void VerifierCollisionBouletsJoueur()
+        {
+            foreach (var x in Mer.Children.OfType<BouletsCanon>())
+            {
+                Rect HitBoxBoulets = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.ActualWidth, x.ActualHeight);
+
+                if(HitBoxBoulets.IntersectsWith(HitBoxJoueur))
+                {
+
+                }
+            }
+        }
+
 
         private void DeplacerBoulets(BouletsCanon x)
         {
@@ -180,7 +202,7 @@ namespace TP3
                 BoutonsTirer.TirGaucheActif = false;
 
                 BouletsCanon tir = new BouletsCanon();
-                Canvas.SetLeft(tir, Canvas.GetLeft(BateauPirate) - BateauPirate.ActualWidth);
+                Canvas.SetLeft(tir, Canvas.GetLeft(BateauPirate));
                 Canvas.SetTop(tir, Canvas.GetTop(BateauPirate));
 
                 tir.CalculerDirection(BateauPirate.VelociteX, BateauPirate.VelociteY, false);
@@ -194,14 +216,15 @@ namespace TP3
         {
             FenetreBoutique boutique = new FenetreBoutique();
             boutique.Show();
+            boutique.Activate();
             boutique.Closing += fermerFenetre();
+            _horloge.Start();
         }
 
         private CancelEventHandler fermerFenetre()
         {
             Canvas.SetLeft(BateauPirate, 500);
             Canvas.SetTop(BateauPirate, 500);
-            _horloge.Start();
             return null;
         }
 

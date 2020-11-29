@@ -19,45 +19,52 @@ namespace TP3.Views
             InitializeComponent();
         }
 
-        private double CalculerCoefVitesse(double VBateauX, double VBateauY)
-        {
-            //return Math.Round(vitesseBoulets / (Math.Sqrt(VBateauX) + Math.Sqrt(VBateauY)));
-            return 5;
-        }
-
+        /// <summary>
+        /// Calcule la drection dans laquelle doivent aller les boulets de canon.
+        /// </summary>
+        /// <param name="VBateauX"></param>
+        /// <param name="VBateauY"></param>
+        /// <param name="cote"></param>
         public void CalculerDirection(double VBateauX, double VBateauY, bool cote) 
         {
             if(cote)
             {
-                VelociteX = -VBateauY * CalculerCoefVitesse(VBateauX, VBateauY);
-                VelociteY = VBateauX * CalculerCoefVitesse(VBateauX, VBateauY);
+                VelociteX = -VBateauY * vitesseBoulets;
+                VelociteY = VBateauX * vitesseBoulets;
             } else
             {
-                VelociteX = VBateauY * CalculerCoefVitesse(VBateauX, VBateauY);
-                VelociteY = -VBateauX * CalculerCoefVitesse(VBateauX, VBateauY);
+                VelociteX = VBateauY * vitesseBoulets;
+                VelociteY = -VBateauX * vitesseBoulets;
             }
         }
 
+        /// <summary>
+        /// Calcule l'angle des boulets de canon par rapport a l'angle du bateau.
+        /// </summary>
         public void CalculerAngle()
         {
             RotationImage.Angle = Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
         }
 
-        public void CalculerDistance()
-        {
-           
-        }
-
+        /// <summary>
+        /// Stop la vitesse du boulet de canon en x.
+        /// </summary>
         public void StopX()
         {
             VelociteX = 0;
         }
 
+        /// <summary>
+        /// Stop la vitesse du boulet de canon en y.
+        /// </summary>
         public void StopY()
         {
             VelociteY = 0;
         }
 
+        /// <summary>
+        /// Stop la vitesse du boulet de canon en x et y.
+        /// </summary>
         public void Stop()
         {
             StopX();
