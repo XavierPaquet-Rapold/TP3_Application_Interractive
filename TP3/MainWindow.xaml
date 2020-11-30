@@ -7,17 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="1080" MinWidth="1920" KeyDown="Window_KeyDown">
 
-    <Canvas x:Name="Mer" Background="#006A94">
-        <views:Port x:Name="Port" Canvas.Left="1374" Canvas.Top="-115"/>
-        <views:BateauPirate x:Name="BateauPirate" Canvas.Left="1418" Canvas.Top="596" RenderTransformOrigin="0.5,0.5">
-            <views:BateauPirate.RenderTransform>
-                <TransformGroup>
-                    <RotateTransform Angle="{Binding Path=AngleBateau}"/>
-                </TransformGroup>
-            </views:BateauPirate.RenderTransform>
-        </views:BateauPirate>
-        <views:InterfaceTir x:Name="BoutonsTirer" Canvas.Left="710" Canvas.Top="889"/>
-        <views:InterfaceAbordage Canvas.Left="215" Canvas.Top="889"/>
-        <views:AffichageArgent/>
-    </Canvas>
+    <Grid>
+        <Canvas x:Name="Mer" Background="#006A94">
+            <views:Port x:Name="Port" Canvas.Left="1374" Canvas.Top="-115"/>
+
+            <views:BateauPirate x:Name="BateauPirate" Canvas.Left="1600" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
+                <views:BateauPirate.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="{Binding Path=AngleBateau}"/>
+                    </TransformGroup>
+                </views:BateauPirate.RenderTransform>
+            </views:BateauPirate>
+
+            <views:GalionEspagnole Canvas.Left="154" Canvas.Top="160" RenderTransformOrigin="0.5,0.5">
+                <views:GalionEspagnole.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"/>
+                    </TransformGroup>
+                </views:GalionEspagnole.RenderTransform>
+            </views:GalionEspagnole>
+        </Canvas>
+
+        <Canvas x:Name="Interface">
+            <views:InterfaceTir x:Name="BoutonsTirer" Canvas.Left="760" Canvas.Top="899"/>
+            <views:InterfaceAbordage x:Name="BoutonsAborder" Canvas.Left="215" Canvas.Top="899"/>
+            <views:AffichageArgent/>
+            <views:AffichageEquipage Canvas.Left="85"/>
+            <views:AffichageBarreVie x:Name="BarreVieJoueur" Height="15" Width="400" Canvas.Left="760" Canvas.Top="988"/>
+        </Canvas>
+    </Grid>
 </Window>

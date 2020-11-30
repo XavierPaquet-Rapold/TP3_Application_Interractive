@@ -4,25 +4,25 @@ using System.Runtime.CompilerServices;
 namespace TP3.Views
 {
     /// <summary>
-    /// Interaction logic for AffichageArgent.xaml
+    /// Interaction logic for AffichageEquipage.xaml
     /// </summary>
-    public partial class AffichageArgent : INotifyPropertyChanged
+    public partial class AffichageEquipage : INotifyPropertyChanged
     {
-        private int _argentCourant = 0;
-        public int ArgentCourant
+        private int _nombreMembreEquipage = 0;
+        public int NombreMembreEquipage
         {
-            get { return _argentCourant; }
+            get { return _nombreMembreEquipage; }
             set
             {
-                if (_argentCourant != value)
+                if (_nombreMembreEquipage != value)
                 {
-                    _argentCourant = value;
+                    _nombreMembreEquipage = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public AffichageArgent()
+        public AffichageEquipage()
         {
             InitializeComponent();
             DataContext = this;

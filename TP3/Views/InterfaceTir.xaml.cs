@@ -34,30 +34,56 @@ namespace TP3.Views
             _horlogeGauche.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Stop de l'horloge et activation du bouton droit
+        /// quand le joueur peut de nouveau tirer a droite.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorlogeDroiteAvance(object sender, EventArgs e)
         {
             TirDroite.IsEnabled = true;
             _horlogeDroite.Stop();
         }
 
+        /// <summary>
+        /// Stop de l'horloge et activation du bouton gauche 
+        /// quand le joueur peut de nouveau tirer a gauche.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorlogeGaucheAvance(object sender, EventArgs e)
         {
             TirGauche.IsEnabled = true;
             _horlogeGauche.Stop();
         }
 
+        /// <summary>
+        /// Gestion du tir de gauche.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TirGauche_Click(object sender, RoutedEventArgs e)
         {
             Rechargement(TirGauche);
             TirGaucheActif = true;
         }
 
+        /// <summary>
+        /// Gestion du tir de droite.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tirdroite_Click(object sender, RoutedEventArgs e)
         {
             Rechargement(TirDroite);
             TirDroitActif = true;
         }
 
+        /// <summary>
+        /// Gestion du rechargement : lance une horloge si un bouton de tir est pressee.
+        /// </summary>
+        /// <param name="bouton"></param>
         private void Rechargement(Button bouton)
         {
             bouton.IsEnabled = false;

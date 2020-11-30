@@ -13,6 +13,11 @@ namespace TP3.Views
             Abordage.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Gestion de l'abordage.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Abordage_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             
