@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using TP3.Models;
 using TP3.Views;
-
+using TP3.ViewModel;
 namespace TP3
 {
     /// <summary>
@@ -17,7 +17,6 @@ namespace TP3
     public partial class MainWindow : INotifyPropertyChanged
     {
         private DispatcherTimer _horloge;
-
         private Rect HitBoxJoueur
         {
             get { return new Rect(Canvas.GetLeft(BateauPirate), Canvas.GetTop(BateauPirate), BateauPirate.ActualWidth, BateauPirate.ActualHeight); }
@@ -56,6 +55,7 @@ namespace TP3
 
         public MainWindow()
         {
+            BatailleNavale.InitialiserJeu();
             InitializeComponent();
             DataContext = this;
             _horloge = new DispatcherTimer();
@@ -73,6 +73,17 @@ namespace TP3
             VerifierCollisionBouletsJoueur();
             VerifierTir();
             DeplacerTir();
+            ChangerProprietes();
+        }
+
+        public void ChangerProprietes()
+        {
+            Or.ArgentCourant = BatailleNavale.ListeNavire[0].NbOr;
+            Equipage.NombreMembreEquipage = BatailleNavale.ListeNavire[0].NombreEquipageCourant;
+            BarreVieJoueur.VieMax = BatailleNavale.ListeNavire[0].VieCoqueMax;
+            BarreVieJoueur.NombreMembreEquipage = BatailleNavale.ListeNavire[0].VieCoqueCourant;
+            BateauPirate.VitesseMax = BatailleNavale.ListeNavire[0].VitesseNavire;
+            InterfaceTir.TpsRechargement = BatailleNavale.ListeNavire[0].VitesseRechargeActuel;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -195,7 +206,7 @@ namespace TP3
 
                 tir.CalculerDirection(BateauPirate.VelociteX, BateauPirate.VelociteY, true);
                 tir.CalculerAngle();
-                tir.Tag = "tirDroit";
+                tir.Tag = "tirJoueur";
                 Mer.Children.Add(tir);
             } else if(BoutonsTirer.TirGaucheActif) 
             {
@@ -207,7 +218,7 @@ namespace TP3
 
                 tir.CalculerDirection(BateauPirate.VelociteX, BateauPirate.VelociteY, false);
                 tir.CalculerAngle();
-                tir.Tag = "tirGauche";
+                tir.Tag = "tirJoueur";
                 Mer.Children.Add(tir);
             }
         }
@@ -217,11 +228,11 @@ namespace TP3
             FenetreBoutique boutique = new FenetreBoutique();
             boutique.Show();
             boutique.Activate();
-            boutique.Closing += fermerFenetre();
+            boutique.Closing += FermerFenetre();
             _horloge.Start();
         }
 
-        private CancelEventHandler fermerFenetre()
+        private CancelEventHandler FermerFenetre()
         {
             Canvas.SetLeft(BateauPirate, 500);
             Canvas.SetTop(BateauPirate, 500);

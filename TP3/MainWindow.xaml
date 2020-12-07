@@ -31,8 +31,8 @@
         <Canvas x:Name="Interface">
             <views:InterfaceTir x:Name="BoutonsTirer" Canvas.Left="760" Canvas.Top="899"/>
             <views:InterfaceAbordage x:Name="BoutonsAborder" Canvas.Left="215" Canvas.Top="899"/>
-            <views:AffichageArgent/>
-            <views:AffichageEquipage Canvas.Left="85"/>
+            <views:AffichageArgent x:Name="Or"/>
+            <views:AffichageEquipage Canvas.Left="85" x:Name="Equipage"/>
             <views:AffichageBarreVie x:Name="BarreVieJoueur" Height="15" Width="400" Canvas.Left="760" Canvas.Top="988"/>
         </Canvas>
     </Grid>

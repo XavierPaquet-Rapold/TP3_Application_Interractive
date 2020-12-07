@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
@@ -8,7 +8,7 @@ namespace TP3.Views
     /// </summary>
     public partial class AffichageBarreVie : INotifyPropertyChanged
     {
-        private int _vieMax = 0;
+        private int _vieMax = BatailleNavale.ListeNavire[0].VieCoqueMax;
         public int VieMax
         {
             get { return _vieMax; }
@@ -22,7 +22,7 @@ namespace TP3.Views
             }
         }
 
-        private int _maxCourante = 0;
+        private int _maxCourante = BatailleNavale.ListeNavire[0].VieCoqueCourant;
         public int VieCourante
         {
             get { return _maxCourante; }

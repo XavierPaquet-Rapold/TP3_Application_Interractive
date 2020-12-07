@@ -2,15 +2,16 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Media;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-
+using TP3.Models;
+using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
     /// Interaction logic for AmiliorationArmure.xaml
     /// </summary>
-    public partial class AmiliorationTemplate : INotifyPropertyChanged
+    public partial class AmeliorationTemplate : INotifyPropertyChanged
     {
         private string _lienImage = String.Empty;
         public string LienImage
@@ -25,7 +26,7 @@ namespace TP3.Views
 
 
         private int _prixAmilioration = 0;
-        public int PrixAmilioration
+        public int PrixAmelioration
         {
             get { return _prixAmilioration; }
             set
@@ -40,7 +41,7 @@ namespace TP3.Views
         }
 
         private string _nomAmilioration = String.Empty;
-        public string NomAmilioration
+        public string NomAmelioration
         {
             get { return _nomAmilioration; }
             set
@@ -53,12 +54,13 @@ namespace TP3.Views
             }
         }
 
-        public AmiliorationTemplate()
+        public AmeliorationTemplate(string message)
         {
             InitializeComponent();
             DataContext = this;
             Prix.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             Prix.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            Bouton.Tag = message;
             Prix.Children.Add(new AffichageArgent());
         }
 
@@ -74,7 +76,30 @@ namespace TP3.Views
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            PrixAmilioration += 5;
+            Button btn = (Button)sender;
+            NavireJoueur temp = (NavireJoueur)BatailleNavale.ListeNavire[0];
+            if (PrixAmelioration <= temp.NbOr) {
+                switch (btn.Tag)
+                {
+                    case "Reparation":
+                        temp.ReparationCoque(PrixAmelioration);
+                        break;
+                    case "Recruter":
+                        temp.AjoutEquipage(PrixAmelioration);
+                        break;
+                    case "Resistance":
+                        temp.AjoutCoque(PrixAmelioration);
+                        break;
+                    case "Vitesse":
+                        temp.AjoutVitesse(PrixAmelioration);
+                        break;
+                    case "CadenceTir":
+                        temp.AjoutCadence(PrixAmelioration);
+                        break;
+                }
+                BatailleNavale.ListeNavire[0] = temp;
+                PrixAmelioration += 5;
+            }
         }
     }
 }

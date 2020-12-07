@@ -13,53 +13,47 @@ namespace TP3.Views
         {
             InitializeComponent();
 
-            AmiliorationTemplate Reparation = new AmiliorationTemplate();
+            AmeliorationTemplate Reparation = new AmeliorationTemplate("Reparation");
             Reparation.LienImage = "Images/reparer.png";
-            Reparation.PrixAmilioration = 500;
-            Reparation.NomAmilioration = "Réparer";
+            Reparation.PrixAmelioration = 500;
+            Reparation.NomAmelioration = "Réparer";
             Fenetre.Children.Add(Reparation);
 
-            AmiliorationTemplate Recruter = new AmiliorationTemplate();
+            AmeliorationTemplate Recruter = new AmeliorationTemplate("Recruter");
             Recruter.LienImage = "Images/recruter.png";
-            Recruter.PrixAmilioration = 500;
-            Recruter.NomAmilioration = "Recruter";
+            Recruter.PrixAmelioration = 500;
+            Recruter.NomAmelioration = "Recruter";
             Fenetre.Children.Add(Recruter);
 
-            AmiliorationTemplate AmiliorationResistance = new AmiliorationTemplate();
-            AmiliorationResistance.LienImage = "Images/armure.png";
-            AmiliorationResistance.PrixAmilioration = 500;
-            AmiliorationResistance.NomAmilioration = "+ Résistance";
-            Fenetre.Children.Add(AmiliorationResistance);
+            AmeliorationTemplate AmeliorationResistance = new AmeliorationTemplate("Resistance");
+            AmeliorationResistance.LienImage = "Images/armure.png";
+            AmeliorationResistance.PrixAmelioration = 500;
+            AmeliorationResistance.NomAmelioration = "+ Résistance";
+            Fenetre.Children.Add(AmeliorationResistance);
 
-            AmiliorationTemplate AmiliorationVitesse = new AmiliorationTemplate();
-            AmiliorationVitesse.LienImage = "Images/vitesse.png";
-            AmiliorationVitesse.PrixAmilioration = 800;
-            AmiliorationVitesse.NomAmilioration = "+ Vitesse";
-            Fenetre.Children.Add(AmiliorationVitesse);
+            AmeliorationTemplate AmeliorationVitesse = new AmeliorationTemplate("Vitesse");
+            AmeliorationVitesse.LienImage = "Images/vitesse.png";
+            AmeliorationVitesse.PrixAmelioration = 800;
+            AmeliorationVitesse.NomAmelioration = "+ Vitesse";
+            Fenetre.Children.Add(AmeliorationVitesse);
 
-            AmiliorationTemplate AmiliorationDegat = new AmiliorationTemplate();
-            AmiliorationDegat.LienImage = "Images/degat.png";
-            AmiliorationDegat.PrixAmilioration = 800;
-            AmiliorationDegat.NomAmilioration = "+ Degat";
-            Fenetre.Children.Add(AmiliorationDegat);
-
-            AmiliorationTemplate AmiliorationCadenceTir = new AmiliorationTemplate();
-            AmiliorationCadenceTir.LienImage = "Images/canon.png";
-            AmiliorationCadenceTir.PrixAmilioration = 800;
-            AmiliorationCadenceTir.NomAmilioration = "+ Cadence";
-            Fenetre.Children.Add(AmiliorationCadenceTir);
+            AmeliorationTemplate AmeliorationCadenceTir = new AmeliorationTemplate("CadenceTir");
+            AmeliorationCadenceTir.LienImage = "Images/canon.png";
+            AmeliorationCadenceTir.PrixAmelioration = 800;
+            AmeliorationCadenceTir.NomAmelioration = "+ Cadence";
+            Fenetre.Children.Add(AmeliorationCadenceTir);
 
             AlignerInterfaces();
         }
 
         /// <summary>
-        /// Aligne toutes les interfaces d'amilioration crees.
+        /// Aligne toutes les interfaces d'amelioration crees.
         /// </summary>
         private void AlignerInterfaces()
         {
             int positionX = 20;
             int positionY = 20;
-            foreach (var x in Fenetre.Children.OfType<AmiliorationTemplate>())
+            foreach (var x in Fenetre.Children.OfType<AmeliorationTemplate>())
             {
                 Canvas.SetLeft(x, positionX);
                 Canvas.SetTop(x, positionY);

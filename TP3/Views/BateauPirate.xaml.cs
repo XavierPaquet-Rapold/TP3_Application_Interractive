@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using TP3.Models;
-
+using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
@@ -11,7 +11,7 @@ namespace TP3.Views
     /// </summary>
     public partial class BateauPirate : UserControl
     {
-        private const double VitesseMax = 1;
+        public double VitesseMax { get; set; } = BatailleNavale.ListeNavire[0].VitesseNavire;
 
         public double VelociteX { get; set; } = 0;
         public double VelociteY { get; set; } = 0;

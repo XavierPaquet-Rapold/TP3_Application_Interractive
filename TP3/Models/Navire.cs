@@ -10,15 +10,18 @@
         /// <summary>Contient le nombre d'equipage du navire lors de sa creation</summary>
         public int NombreEquipageMax { get; internal set; }
         /// <summary>Contient le nombre d'equipage restant apres les attaques</summary>
-        public int NombreEquipageCourant { get; private set; }
+        public int NombreEquipageCourant { get; internal set; }
         /// <summary>Contient la vie de la coque du navire lors de sa creation</summary>
-        public int VieCoqueMax { get; private set; }
+        public int VieCoqueMax { get; internal set; }
         /// <summary>Contient la vie de la coque restant apres les attaques</summary>
-        public int VieCoqueCourant { get; private set; }
+        public int VieCoqueCourant { get; internal set; }
         /// <summary>Contient la vitesse maximale actuelle du navire a tout moment de la partie</summary>
-        public double VitesseNavire { get; private set; }
+        public double VitesseNavire { get; internal set; }
+        /// <summary>Degats infliges lorsque boulet touche le navire ennemi</summary>
+        public int Degats { get; internal set; }
+        public int VitesseRechargeMax { get; internal set; }
         /// <summary>Contient la vitesse de recharge maximale actuelle du navire a tout moment de la partie</summary>
-        public int VitesseRecharge { get; private set; }
+        public int VitesseRechargeActuel { get; private set; }
         /// <summary>Contient le nombre d'or actuel du navire a tout moment de la partie</summary>
         public int NbOr { get; private set; }
         /// <summary>Contient le nombre de canons a l'arriere du navire</summary>
@@ -38,7 +41,7 @@
         /// <param name="vitesse">la vitesse maximale du navire</param>
         /// <param name="vitesseRecharge">la vitesse de recharge des canons du navire</param>
         /// <param name="nbOr">le nombre d'or contenu dans le navire</param>
-        /// <param name="nombreCanonArriere">le nombre de canons a l'arriere du navire</param>
+        /// <param name="nbCanonArriere">le nombre de canons a l'arriere du navire</param>
         /// <param name="nbCanonCote">le nombre de canons sur le cote du navire</param>
         public Navire(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int nbCanonCote = 0, int nbCanonArriere = 0)
         {
@@ -47,9 +50,9 @@
             VieCoqueMax = coque;
             VieCoqueCourant = coque;
             VitesseNavire = vitesse;
-            VitesseRecharge = vitesseRecharge;
+            VitesseRechargeMax = vitesseRecharge;
             NbOr = nbOr;
-            NbCanonArriere = nombreCanonArriere;
+            NbCanonArriere = nbCanonArriere;
             NbCanonCote = nbCanonCote;
         }
 
@@ -119,7 +122,7 @@
         /// </summary>
         /// <param name="orUtilise">Or vole ou utilise par le navire</param>
         /// <returns></returns>
-        public int UtilisationOr(uint orUtilise)
+        public int UtilisationOr(int orUtilise)
         {
             NbOr -= (int)orUtilise;
             if (NbOr < 0)
@@ -139,10 +142,10 @@
         /// </summary>
         private void CalculeVitesseNavire()
         {
-            VitesseRecharge = (int)(VitesseRecharge * CalculeNbVieEquipage());
+            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieEquipage());
             if (CalculeNbVieEquipage() <= 1 / 3)
             {
-                VitesseRecharge = 0;
+                VitesseRechargeActuel = 0;
             }
         }
 
@@ -153,7 +156,7 @@
         private void CalculeVitesseRecharge()
         {
             double nbVieCoque = VieCoqueCourant / VieCoqueMax;
-            VitesseNavire = (int)(VitesseRecharge * CalculeNbVieCoque());
+            VitesseNavire = (int)(VitesseRechargeActuel * CalculeNbVieCoque());
             if (CalculeNbVieCoque() <= 1 / 3)
             {
                 VitesseNavire = 0;

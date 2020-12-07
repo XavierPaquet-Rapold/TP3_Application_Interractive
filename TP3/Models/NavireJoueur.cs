@@ -1,4 +1,5 @@
-﻿namespace TP3.Models
+﻿using TP3;
+namespace TP3.Models
 {
     /// <summary>
     /// Sous-classe de la classe navire qui definit les proprietes propres au navire du joueur
@@ -17,24 +18,84 @@
         /// <summary>Nombre d'equipage du bateau</summary>
         private static int Equipage = 80;
         /// <summary>Nombre de pieces d'or contenu dans le bateau</summary>
-        private static int NbOr = 0;
+        private static int NombreOr = 10000;
         #endregion
 
         #region Constructeur
         /// <summary>
         /// Constructeur qui cree un bateau avec les ajouts achetes par le joueur
         /// </summary>
-        /// <param name="coque">Nombre de vie de la coque</param>
+        /// <param name="coque">Reparation de la coque</param>
         /// <param name="recrutement">Ajout au nombre de membre d'equipage</param>
         /// <param name="resistance">Ajout au nombre de vie de la coque</param>
         /// <param name="vitesse">Augmentation de la vitesse du navire</param>
         /// <param name="degat">Augmentation des degats du navire</param>
         /// <param name="cadence"></param>
-        public NavireJoueur(int coque, int recrutement, int resistance, int vitesse, int degat, int cadence) :
-            base(Equipage + (recrutement * 20), coque, Vitesse - (vitesse * 10), NbOr, VitesseRecharge - (cadence * 2), CanonCote)
+        public NavireJoueur() :
+            base(Equipage, VieCoque, Vitesse, VitesseRecharge, NombreOr, CanonCote)
         {
 
         }
         #endregion
+
+        public int AjoutCoque(int prix)
+        {
+            if(prix <= this.NbOr && prix > 0){
+                this.VieCoqueMax += 50;
+                this.UtilisationOr(prix);
+            }
+            return this.VieCoqueMax;
+        }
+
+        public int ReparationCoque(int prix)
+        {
+            if (prix <= this.NbOr && prix > 0)
+            {
+                this.VieCoqueCourant = this.VieCoqueMax;
+                this.UtilisationOr(prix);
+            }
+            return this.VieCoqueCourant;
+        }
+
+        public int AjoutEquipage(int prix)
+        {
+            if (prix <= this.NbOr && prix > 0)
+            {
+                this.NombreEquipageMax += 50;
+                this.NombreEquipageCourant = NombreEquipageMax;
+                this.UtilisationOr(prix);
+            }
+            return this.NombreEquipageMax;
+        }
+
+        public double AjoutVitesse(int prix)
+        {
+            if (prix <= this.NbOr && prix > 0)
+            {
+                this.VitesseNavire += 0.5;
+                this.UtilisationOr(prix);
+            }
+            return this.VitesseNavire;
+        }
+
+        public int AjoutDegats(int prix)
+        {
+            if (prix <= this.NbOr && prix > 0)
+            {
+                this.Degats += 25;
+                this.UtilisationOr(prix);
+            }
+            return this.Degats;
+        }
+        
+        public int AjoutCadence(int prix)
+        {
+            if (prix <= this.NbOr && prix > 0)
+            {
+                this.VitesseRechargeMax -= 1;
+                this.UtilisationOr(prix);
+            }
+            return this.Degats;
+        }
     }
 }

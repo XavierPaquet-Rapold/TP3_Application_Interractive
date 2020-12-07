@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using TP3.ViewModel;
+using TP3.Models;
 namespace TP3.Views
 {
     /// <summary>
@@ -8,7 +9,7 @@ namespace TP3.Views
     /// </summary>
     public partial class AffichageArgent : INotifyPropertyChanged
     {
-        private int _argentCourant = 0;
+        private int _argentCourant = BatailleNavale.ListeNavire[0].NbOr;
         public int ArgentCourant
         {
             get { return _argentCourant; }

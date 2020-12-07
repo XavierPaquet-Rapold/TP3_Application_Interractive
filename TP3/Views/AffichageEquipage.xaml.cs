@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
@@ -8,7 +8,7 @@ namespace TP3.Views
     /// </summary>
     public partial class AffichageEquipage : INotifyPropertyChanged
     {
-        private int _nombreMembreEquipage = 0;
+        private int _nombreMembreEquipage = BatailleNavale.ListeNavire[0].NombreEquipageCourant;
         public int NombreMembreEquipage
         {
             get { return _nombreMembreEquipage; }
