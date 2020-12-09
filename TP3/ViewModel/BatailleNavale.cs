@@ -72,5 +72,24 @@ namespace TP3.ViewModel
                 }
             }
         }
+
+        public static bool VerificationFinNiveau()
+        {
+            int nombreBateauxNPC = NombreBateaux - 2;
+            int bateauxMorts = 0;
+            for (int i = 0; i < NombreBateaux; i++)
+            {
+                if(_listeNavire[i + 2].VieCoqueCourant == 0)
+                {
+                    bateauxMorts++;
+                }
+            }
+            if(bateauxMorts == nombreBateauxNPC)
+            {
+                _niveau++;
+                return true;
+            }
+            return false;
+        }
     }
 }
