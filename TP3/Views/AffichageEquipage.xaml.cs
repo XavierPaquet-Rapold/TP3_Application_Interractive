@@ -8,6 +8,9 @@ namespace TP3.Views
     /// </summary>
     public partial class AffichageEquipage : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Nombre d'equipage courant du bateau du joueur
+        /// </summary>
         private int _nombreMembreEquipage = BatailleNavale.ListeNavire[0].NombreEquipageCourant;
         public int NombreMembreEquipage
         {
@@ -21,15 +24,22 @@ namespace TP3.Views
                 }
             }
         }
-
+        /// <summary>
+        /// Affiche le nombre de membre de l'équipage du bateau
+        /// </summary>
         public AffichageEquipage()
         {
             InitializeComponent();
             DataContext = this;
         }
 
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Implementation de INotifyPropertyChanged
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)

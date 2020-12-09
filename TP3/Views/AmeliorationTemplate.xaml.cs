@@ -13,7 +13,11 @@ namespace TP3.Views
     /// </summary>
     public partial class AmeliorationTemplate : INotifyPropertyChanged
     {
+        /// <summary>lien de l'image de l'amelioration a mettre dans le template</summary>
         private string _lienImage = String.Empty;
+        /// <summary>
+        /// Getter et setter du lien de l'image de l'amelioration a mettre dans le template
+        /// </summary>
         public string LienImage
         {
             get { return _lienImage; }
@@ -24,8 +28,14 @@ namespace TP3.Views
             }
         }
 
-
+        /// <summary>
+        /// Enregistre le prix de l'amelioration a mettre dans le template
+        /// </summary>
         private int _prixAmilioration = 0;
+
+        /// <summary>
+        /// Getter et setter du prix de l'amelioration a mettre dans le template
+        /// </summary>
         public int PrixAmelioration
         {
             get { return _prixAmilioration; }
@@ -40,6 +50,9 @@ namespace TP3.Views
             }
         }
 
+        /// <summary>
+        /// Nom de l'amelioration a mettre dans le template
+        /// </summary>
         private string _nomAmilioration = String.Empty;
         public string NomAmelioration
         {
@@ -54,6 +67,10 @@ namespace TP3.Views
             }
         }
 
+        /// <summary>
+        /// Affichage du template
+        /// </summary>
+        /// <param name="message">Message a mettre dans le tag du bouton</param>
         public AmeliorationTemplate(string message)
         {
             InitializeComponent();
@@ -66,6 +83,10 @@ namespace TP3.Views
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Implementation de INotifyPropertyChanged
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
@@ -74,6 +95,12 @@ namespace TP3.Views
             }
         }
 
+        /// <summary>
+        /// Methode qui definit les actions de chaque boutons lorsqu'il
+        /// est touche
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Button btn = (Button)sender;

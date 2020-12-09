@@ -9,6 +9,8 @@ using System.Windows.Threading;
 using TP3.Models;
 using TP3.Views;
 using TP3.ViewModel;
+using System.Windows.Media;
+
 namespace TP3
 {
     /// <summary>
@@ -16,12 +18,20 @@ namespace TP3
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        /// <summary>Horloge principale du jeu</summary>
         private DispatcherTimer _horloge;
+        /// <summary>La musique du jeu</summary>
+        private MediaPlayer _mediaPlayer = new MediaPlayer();
+
+        /// <summary>Cree un rectangle pour la hitbox du joueur</summary>
         private Rect HitBoxJoueur
         {
             get { return new Rect(Canvas.GetLeft(BateauPirate), Canvas.GetTop(BateauPirate), BateauPirate.ActualWidth, BateauPirate.ActualHeight); }
         }
 
+        /// <summary>
+        /// Cree un rectangle pour la hitbox du port
+        /// </summary>
         private Rect HitBoxPort
         {
             get
@@ -30,7 +40,11 @@ namespace TP3
             }
         }
 
+        /// <summary>Stock l'angle du bateau</summary>
         private double _angleBateau;
+        /// <summary>
+        /// Getter et setter de l'angle du bateau
+        /// </summary>
         public double AngleBateau
         {
             get { return _angleBateau; }
@@ -45,6 +59,11 @@ namespace TP3
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Implementation de INotifyPropertyChanged
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
@@ -53,10 +72,15 @@ namespace TP3
             }
         }
 
+        /// <summary>
+        /// Initialise la fenetre principale
+        /// </summary>
         public MainWindow()
         {
             BatailleNavale.InitialiserJeu();
             InitializeComponent();
+            //_mediaPlayer.Open(new Uri(@"../../bensound-ukulele.mp3", UriKind.RelativeOrAbsolute));
+            //_mediaPlayer.Play();
             DataContext = this;
             _horloge = new DispatcherTimer();
             _horloge.Interval = TimeSpan.FromMilliseconds(20);
@@ -65,6 +89,11 @@ namespace TP3
             _horloge.Start();
         }
 
+        /// <summary>
+        /// Methodes appeles a chaque fois que l'horloge avance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorlogeAvance(object sender, EventArgs e)
         {
             DeplacerBateau();
@@ -76,16 +105,27 @@ namespace TP3
             ChangerProprietes();
         }
 
+        /// <summary>
+        /// Changer les proprietes du bateau du joueur a chaque fois que l'horloge avance
+        /// </summary>
         public void ChangerProprietes()
         {
             Or.ArgentCourant = BatailleNavale.ListeNavire[0].NbOr;
             Equipage.NombreMembreEquipage = BatailleNavale.ListeNavire[0].NombreEquipageCourant;
             BarreVieJoueur.VieMax = BatailleNavale.ListeNavire[0].VieCoqueMax;
             BarreVieJoueur.NombreMembreEquipage = BatailleNavale.ListeNavire[0].VieCoqueCourant;
+            BarreVieJoueur.VieCourante = BatailleNavale.ListeNavire[0].VieCoqueCourant;
             BateauPirate.VitesseMax = BatailleNavale.ListeNavire[0].VitesseNavire;
-            InterfaceTir.TpsRechargement = BatailleNavale.ListeNavire[0].VitesseRechargeActuel;
+            BoutonsTirer.Changement_Minuterie();
+            BoutonsAborder.Abordage_Actif();
+            Niveau.Niveau = BatailleNavale.Niveau;
         }
 
+        /// <summary>
+        /// Les actions faites a chaque fois qu'une touche est activee 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -128,6 +168,9 @@ namespace TP3
             }
         }
 
+        /// <summary>
+        /// Deplace le bateau a chaque fois que l'horloge avance
+        /// </summary>
         private void DeplacerBateau()
         {
             double nextX = Canvas.GetLeft(BateauPirate) + BateauPirate.VelociteX;
@@ -157,11 +200,17 @@ namespace TP3
             Canvas.SetTop(BateauPirate, nextY);
         }
 
+        /// <summary>
+        /// Calcule l'angle du bateau
+        /// </summary>
         private void AnglerBateau()
         {
             AngleBateau = BateauPirate.CalculerAngle();
         }
 
+        /// <summary>
+        /// Verifie les collisions du joueur avec le port
+        /// </summary>
         private void VerifierCollisionJoueurPort()
         {
             if(HitBoxJoueur.IntersectsWith(HitBoxPort))
@@ -171,6 +220,9 @@ namespace TP3
             } 
         }
 
+        /// <summary>
+        /// Verifie la collision de boulets avec le joueur
+        /// </summary>
         private void VerifierCollisionBouletsJoueur()
         {
             foreach (var x in Mer.Children.OfType<BouletsCanon>())
@@ -179,12 +231,15 @@ namespace TP3
 
                 if(HitBoxBoulets.IntersectsWith(HitBoxJoueur))
                 {
-
+                    //BatailleNavale.ListeNavire[0].DegatsBoulets(20);
                 }
             }
         }
 
-
+        /// <summary>
+        /// Deplace les boulets
+        /// </summary>
+        /// <param name="x"></param>
         private void DeplacerBoulets(BouletsCanon x)
         {
             double nextX = Canvas.GetLeft(x) + x.VelociteX;
@@ -194,6 +249,9 @@ namespace TP3
             Canvas.SetTop(x, nextY);
         }
 
+        /// <summary>
+        /// Verifie si un bouton pour tirer est touche et effectue les actions en consequences
+        /// </summary>
         private void VerifierTir()
         {
             if(BoutonsTirer.TirDroitActif)
@@ -223,6 +281,9 @@ namespace TP3
             }
         }
 
+        /// <summary>
+        /// Ouvre la fenetre de la boutique
+        /// </summary>
         private void OuvrirFenetreBoutique()
         {
             FenetreBoutique boutique = new FenetreBoutique();
@@ -232,6 +293,10 @@ namespace TP3
             _horloge.Start();
         }
 
+        /// <summary>
+        /// Ferme la fenetre de la boutique
+        /// </summary>
+        /// <returns></returns>
         private CancelEventHandler FermerFenetre()
         {
             Canvas.SetLeft(BateauPirate, 500);
@@ -239,6 +304,9 @@ namespace TP3
             return null;
         }
 
+        /// <summary>
+        /// Deplace tous les tirs
+        /// </summary>
         public void DeplacerTir()
         {
             foreach (var x in Mer.Children.OfType<BouletsCanon>())

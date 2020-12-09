@@ -38,26 +38,39 @@ namespace TP3.Models
         }
         #endregion
 
-        public int AjoutCoque(int prix)
+        #region Achats
+        /// <summary>
+        /// Methode qui ajoute de la vie à la coque lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void AjoutCoque(int prix)
         {
             if(prix <= this.NbOr && prix > 0){
                 this.VieCoqueMax += 50;
                 this.UtilisationOr(prix);
             }
-            return this.VieCoqueMax;
         }
 
-        public int ReparationCoque(int prix)
+        /// <summary>
+        /// Methode qui repare la coque lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void ReparationCoque(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
             {
                 this.VieCoqueCourant = this.VieCoqueMax;
                 this.UtilisationOr(prix);
             }
-            return this.VieCoqueCourant;
         }
-
-        public int AjoutEquipage(int prix)
+        /// <summary>
+        /// Methode qui ajoute des membres d'equipage lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void AjoutEquipage(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
             {
@@ -65,37 +78,76 @@ namespace TP3.Models
                 this.NombreEquipageCourant = NombreEquipageMax;
                 this.UtilisationOr(prix);
             }
-            return this.NombreEquipageMax;
         }
-
-        public double AjoutVitesse(int prix)
+        /// <summary>
+        /// Methode qui ajoute de la vietesse au bateau lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void AjoutVitesse(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
             {
                 this.VitesseNavire += 0.5;
                 this.UtilisationOr(prix);
             }
-            return this.VitesseNavire;
         }
 
-        public int AjoutDegats(int prix)
+        /// <summary>
+        /// Methode qui ajoute des degats a chaque boulets lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void AjoutDegats(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
             {
                 this.Degats += 25;
                 this.UtilisationOr(prix);
             }
-            return this.Degats;
         }
-        
-        public int AjoutCadence(int prix)
+
+        /// <summary>
+        /// Methode qui augmente la cadence de tire lorsque le joueur l'achete
+        /// </summary>
+        /// <param name="prix">Le prix de l'achat</param>
+        /// <returns></returns>
+        public void AjoutCadence(int prix)
         {
-            if (prix <= this.NbOr && prix > 0)
+            if (prix <= this.NbOr && prix > 0 && VitesseRechargeActuel != 0 && VitesseRechargeMax != 0)
             {
+                this.VitesseRechargeActuel -= 1;
                 this.VitesseRechargeMax -= 1;
                 this.UtilisationOr(prix);
             }
-            return this.Degats;
         }
+        #endregion
+
+        #region Actions
+        /// <summary>
+        /// Methode qui definit les actions lors de l'abordage
+        /// </summary>
+        /// <param name="equipage">Nombre de membre de l'equipage ennemi</param>
+        /// <param name="or">Le nombre d'or du bateau ennemi</param>
+        public void Abordage(int equipage, int or)
+        {
+            if (this.NombreEquipageCourant * 5 > equipage)
+            {
+                if((this.NombreEquipageCourant += equipage / 2) < NombreEquipageMax)
+                {
+                    this.NombreEquipageCourant += equipage / 2;
+                    this.NbOr += or;
+                }
+                else
+                {
+                    this.NombreEquipageCourant = this.NombreEquipageMax;
+                }
+            }
+            else
+            {
+                this.NombreEquipageCourant = 0;
+            }
+        }
+        #endregion
     }
 }

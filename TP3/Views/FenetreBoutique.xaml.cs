@@ -9,6 +9,9 @@ namespace TP3.Views
     /// </summary>
     public partial class FenetreBoutique : Window
     {
+        /// <summary>
+        /// Initialise le fenetre de la boutique
+        /// </summary>
         public FenetreBoutique()
         {
             InitializeComponent();

@@ -21,9 +21,9 @@
         public int Degats { get; internal set; }
         public int VitesseRechargeMax { get; internal set; }
         /// <summary>Contient la vitesse de recharge maximale actuelle du navire a tout moment de la partie</summary>
-        public int VitesseRechargeActuel { get; private set; }
+        public int VitesseRechargeActuel { get; internal set; }
         /// <summary>Contient le nombre d'or actuel du navire a tout moment de la partie</summary>
-        public int NbOr { get; private set; }
+        public int NbOr { get; internal set; }
         /// <summary>Contient le nombre de canons a l'arriere du navire</summary>
         public int NbCanonArriere { get; private set; }
         /// <summary>Contient le nombre de canons sur les cotes du navire</summary>
@@ -51,6 +51,7 @@
             VieCoqueCourant = coque;
             VitesseNavire = vitesse;
             VitesseRechargeMax = vitesseRecharge;
+            VitesseRechargeActuel = vitesseRecharge;
             NbOr = nbOr;
             NbCanonArriere = nbCanonArriere;
             NbCanonCote = nbCanonCote;

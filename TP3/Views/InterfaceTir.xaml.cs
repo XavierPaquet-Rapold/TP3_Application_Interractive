@@ -10,14 +10,24 @@ namespace TP3.Views
     /// </summary>
     public partial class InterfaceTir : UserControl
     {
-        public static int TpsRechargement { get; set; } = BatailleNavale.ListeNavire[0].VitesseRechargeActuel;
+        /// <summary>Temps de rechargement du tir</summary>
+        public static int TpsRechargement { get; set; } = 0;
 
+        /// <summary>
+        /// Horloge des canons a droite
+        /// </summary>
         private DispatcherTimer _horlogeDroite;
+        /// <summary>
+        /// horloge des canons a gauche
+        /// </summary>
         private DispatcherTimer _horlogeGauche;
 
         public bool TirDroitActif = false;
         public bool TirGaucheActif = false;
 
+        /// <summary>
+        /// Initialise l'interface de tir
+        /// </summary>
         public InterfaceTir()
         {
             InitializeComponent();
@@ -65,6 +75,7 @@ namespace TP3.Views
         /// <param name="e"></param>
         private void TirGauche_Click(object sender, RoutedEventArgs e)
         {
+            _horlogeGauche.Interval = TimeSpan.FromSeconds(TpsRechargement);
             Rechargement(TirGauche);
             TirGaucheActif = true;
         }
@@ -76,6 +87,7 @@ namespace TP3.Views
         /// <param name="e"></param>
         private void Tirdroite_Click(object sender, RoutedEventArgs e)
         {
+            _horlogeDroite.Interval = TimeSpan.FromSeconds(TpsRechargement);
             Rechargement(TirDroite);
             TirDroitActif = true;
         }
@@ -95,6 +107,14 @@ namespace TP3.Views
             {
                 _horlogeGauche.Start();
             }
+        }
+
+        /// <summary>
+        /// Change la vitesse de chargement des minuteries
+        /// </summary>
+        public void Changement_Minuterie()
+        {
+            TpsRechargement = BatailleNavale.ListeNavire[0].VitesseRechargeActuel;
         }
     }
 }

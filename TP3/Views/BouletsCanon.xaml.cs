@@ -8,12 +8,27 @@ namespace TP3.Views
     /// </summary>
     public partial class BouletsCanon : UserControl
     {
+        /// <summary>
+        /// Distance parcourue par le boulet
+        /// </summary>
         public double DistanceParcourue = 0;
+        /// <summary>
+        /// Vitesse du boulet
+        /// </summary>
         public double vitesseBoulets = 5;
 
+        /// <summary>
+        /// Volocite du boulet dans l'axe X
+        /// </summary>
         public double VelociteX { get; set; } = 0;
+        /// <summary>
+        /// Volocite du boulet dans l'axe Y
+        /// </summary>
         public double VelociteY { get; set; } = 0;
 
+        /// <summary>
+        /// Initialisation des boulets de canon
+        /// </summary>
         public BouletsCanon()
         {
             InitializeComponent();
@@ -22,9 +37,9 @@ namespace TP3.Views
         /// <summary>
         /// Calcule la drection dans laquelle doivent aller les boulets de canon.
         /// </summary>
-        /// <param name="VBateauX"></param>
-        /// <param name="VBateauY"></param>
-        /// <param name="cote"></param>
+        /// <param name="VBateauX">Velocite du navire dans l'axe X</param>
+        /// <param name="VBateauY">Velocite du navire dans l'axe Y</param>
+        /// <param name="cote">cote du navire duquel le boulet est tire</param>
         public void CalculerDirection(double VBateauX, double VBateauY, bool cote) 
         {
             if(cote)

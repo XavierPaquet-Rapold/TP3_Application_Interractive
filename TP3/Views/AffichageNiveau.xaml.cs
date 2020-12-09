@@ -1,40 +1,41 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
-    /// Interaction logic for AffichageArgent.xaml
+    /// Interaction logic for AffichageNiveau.xaml
     /// </summary>
-    public partial class AffichageArgent : INotifyPropertyChanged
+    public partial class AffichageNiveau : UserControl
     {
-        /// <summary>Argent courant du navire du joueur</summary>
-        private int _argentCourant = BatailleNavale.ListeNavire[0].NbOr;
-
+        /// <summary>Enregistre le niveau du jeu</summary>
+        private int _niveau = BatailleNavale.Niveau;
         /// <summary>
-        /// setter et getter de argent courant
+        /// Getter et setter de niveau
         /// </summary>
-        public int ArgentCourant
+        public int Niveau
         {
-            get { return _argentCourant; }
+            get { return _niveau; }
             set
             {
-                if (_argentCourant != value)
+                if (_niveau != value)
                 {
-                    _argentCourant = value;
+                    _niveau = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
         /// <summary>
-        /// Affichage du nombre d'or du joueur
+        /// Affichage des niveaux
         /// </summary>
-        public AffichageArgent()
+        public AffichageNiveau()
         {
             InitializeComponent();
             DataContext = this;
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

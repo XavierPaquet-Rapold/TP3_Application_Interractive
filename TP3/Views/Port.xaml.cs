@@ -7,6 +7,9 @@ namespace TP3.Views
     /// </summary>
     public partial class Port : UserControl
     {
+        /// <summary>
+        /// Initialise le port
+        /// </summary>
         public Port()
         {
             InitializeComponent();

@@ -18,6 +18,9 @@ namespace TP3.Views
     /// </summary>
     public partial class GalionEspagnole : UserControl
     {
+        /// <summary>
+        /// Initialise un galion espagnol
+        /// </summary>
         public GalionEspagnole()
         {
             InitializeComponent();

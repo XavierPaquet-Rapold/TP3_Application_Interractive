@@ -4,13 +4,29 @@ using TP3.Views;
 
 namespace TP3.ViewModel
 {
+    /// <summary>
+    /// Classe qui fait le lien entre le front-end et le back-end
+    /// </summary>
     static class BatailleNavale
     {
-        private const int NombreBateaux = 3;
+        /// <summary>Nombre de bateaux du jeu</summary>
+        private const int NombreBateaux = 4;
+        /// <summary>Le niveau actuel du joueur</summary>
         private static int _niveau = 1;
+        /// <summary>La liste de tous les navires en jeu</summary>
         private static List<Navire> _listeNavire;
+        /// <summary>
+        /// Propriete qui retourne la liste des navires en jeu
+        /// </summary>
         public static List<Navire> ListeNavire { get { return _listeNavire; } set { _listeNavire = value; } }
+        /// <summary>
+        /// Propriete qui retourne le niveau actuel du joueur
+        /// </summary>
+        public static int Niveau { get { return _niveau; } private set { _niveau = value; } }
 
+        /// <summary>
+        /// Methode qui remplit le tableau des navires au debut du jeu
+        /// </summary>
         public static void InitialiserJeu()
         {
             ListeNavire = new List<Navire>();
@@ -32,6 +48,10 @@ namespace TP3.ViewModel
             }
         }
 
+        /// <summary>
+        /// Methode qui initialise un nouveau niveau avec de nouveaux navires
+        /// ennemis
+        /// </summary>
         public static void InitialiserNiveau()
         {
             var temp = ListeNavire[0];
