@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using TP3.ViewModel;
 using TP3.Models;
+
 namespace TP3.Views
 {
     /// <summary>
@@ -44,6 +45,10 @@ namespace TP3.Views
             if (BatailleNavale.ListeNavire[0].NombreEquipageCourant * 5 > BatailleNavale.ListeNavire[1].NombreEquipageCourant)
             {
                 Abordage.IsEnabled = true;
+            }
+            else
+            {
+                Abordage.IsEnabled = false;
             }
         }
     }

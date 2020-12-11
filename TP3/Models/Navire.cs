@@ -68,7 +68,7 @@
         /// <returns>Un double qui contient le pourcentage d'equipage restant dans le navire</returns>
         private double CalculeNbVieEquipage()
         {
-            return NombreEquipageCourant / NombreEquipageMax;
+            return (double)NombreEquipageCourant / (double)NombreEquipageMax;
         }
         /// <summary>
         /// Methode qui calcule le pourcentage de vie restant de la coque
@@ -76,7 +76,8 @@
         /// <returns>Un double qui contient le pourcentage de vie de la coque restant du navire</returns>
         public double CalculeNbVieCoque()
         {
-            return VieCoqueCourant / VieCoqueMax;
+            var a = (double)VieCoqueCourant / (double)VieCoqueMax;
+            return (double)VieCoqueCourant / (double)VieCoqueMax;
         }
 
         #endregion
@@ -144,10 +145,10 @@
         /// </summary>
         private void CalculeVitesseNavire()
         {
-            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieCoque());
-            if (CalculeNbVieEquipage() <= 1 / 3)
+            VitesseNavire = (int)(VitesseNavire * CalculeNbVieCoque());
+            if (CalculeNbVieCoque() <= 1 / 3)
             {
-                VitesseRechargeActuel = 0;
+                VitesseNavire = 0;
             }
         }
 
@@ -157,11 +158,10 @@
         /// </summary>
         private void CalculeVitesseRecharge()
         {
-            double nbVieCoque = VieCoqueCourant / VieCoqueMax;
-            VitesseNavire = (int)(VitesseRechargeActuel * CalculeNbVieCoque());
-            if (CalculeNbVieCoque() <= 1 / 3)
+            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieEquipage());
+            if (CalculeNbVieEquipage() <= 1 / 3)
             {
-                VitesseNavire = 0;
+                VitesseRechargeActuel = 10000;
             }
         }
 

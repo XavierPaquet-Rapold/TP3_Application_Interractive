@@ -10,7 +10,7 @@
         /// <summary>Nombre de pieces d'or contenu dans le bateau au niveau 1</summary>
         private const int NbOR = 350;
         /// <summary>Nombre d'equipage du bateau au niveau 1</summary>
-        private const int Equipage = 1;
+        private const int Equipage = 100;
         /// <summary>Nombre de canons sur le cote du bateau</summary>
         private const int CanonCote = 36;
         /// <summary>Nombre de canons a l'arriere du bateau</summary>
@@ -44,6 +44,7 @@
         /// </summary>
         public void Abordage()
         {
+            this.VieCoqueCourant = 0;
             this.NombreEquipageCourant = 0;
             this.NbOr = 0;
         }

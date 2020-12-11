@@ -55,6 +55,7 @@
             <views:AffichageArgent x:Name="Or"/>
             <views:AffichageEquipage Canvas.Left="123" x:Name="Equipage"/>
             <views:AffichageNiveau Canvas.Left="238" x:Name="Niveau"/>
+            <views:BoutonNiveau x:Name="BoutonNiveau" Canvas.Right="215" Canvas.Top="899"/>
             <views:AffichageBarreVie x:Name="BarreVieJoueur" Height="15" Width="400" Canvas.Left="760" Canvas.Top="988"/>
         </Canvas>
     </Grid>

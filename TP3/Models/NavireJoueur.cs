@@ -12,9 +12,9 @@ namespace TP3.Models
         /// <summary>Le nombre de vie de la coque du bateau</summary>
         private static int VieCoque = 100;
         /// <summary>La vitesse du bateau</summary>
-        private static double Vitesse = 1;
+        private static double Vitesse = 5;
         /// <summary>La vitesse de recharge des canons du bateau</summary>
-        private static int VitesseRecharge = 10;
+        private static int VitesseRecharge = 0;
         /// <summary>Nombre d'equipage du bateau</summary>
         private static int Equipage = 80;
         /// <summary>Nombre de pieces d'or contenu dans le bateau</summary>
@@ -135,15 +135,8 @@ namespace TP3.Models
         {
             if (this.NombreEquipageCourant * 5 > equipage)
             {
-                if((this.NombreEquipageCourant += equipage / 2) < NombreEquipageMax)
-                {
                     this.NombreEquipageCourant += equipage / 2;
                     this.NbOr += or;
-                }
-                else
-                {
-                    this.NombreEquipageCourant = this.NombreEquipageMax;
-                }
             }
             else
             {

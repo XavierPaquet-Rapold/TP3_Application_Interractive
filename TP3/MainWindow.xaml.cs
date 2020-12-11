@@ -18,7 +18,7 @@ namespace TP3
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private int TempsRechargeEnnemis = 10;
+        private int TempsRechargeEnnemis = 20;
 
         private int vitesseTirEnnemis = 6;
 
@@ -113,16 +113,17 @@ namespace TP3
         /// <param name="e"></param>
         private void HorlogeAvance(object sender, EventArgs e)
         {
-            DetruireRecyclage();
             DeplacerBateau();
             AnglerBateau();
             VerifierCollisionJoueurPort();
             VerifierCollisionBouletsJoueur();
             VerifierCollisonBouletsEnnemis();
+            VerifierCollisonJoueurEnnemis();
             VerifierTir();
             DeplacerTir();
             ChangerProprietes();
             VerifierSiMort();
+            DetruireRecyclage();
         }
 
         private void HorlogeEnnemisAvance(object sender, EventArgs e)
@@ -140,9 +141,21 @@ namespace TP3
             BarreVieJoueur.VieMax = BatailleNavale.ListeNavire[0].VieCoqueMax;
             BarreVieJoueur.NombreMembreEquipage = BatailleNavale.ListeNavire[0].VieCoqueCourant;
             BarreVieJoueur.VieCourante = BatailleNavale.ListeNavire[0].VieCoqueCourant;
-            BateauPirate.VitesseMax = BatailleNavale.ListeNavire[0].VitesseNavire;
+            BarreVieGalion.VieMax = BatailleNavale.ListeNavire[1].VieCoqueMax;
+            BarreVieGalion.NombreMembreEquipage = BatailleNavale.ListeNavire[1].VieCoqueCourant;
+            BarreVieGalion.VieCourante = BatailleNavale.ListeNavire[1].VieCoqueCourant;
+            BarreVieEscorte2.VieMax = BatailleNavale.ListeNavire[2].VieCoqueMax;
+            BarreVieEscorte2.NombreMembreEquipage = BatailleNavale.ListeNavire[2].VieCoqueCourant;
+            BarreVieEscorte2.VieCourante = BatailleNavale.ListeNavire[2].VieCoqueCourant;
+            BarreVieEscorte3.VieMax = BatailleNavale.ListeNavire[3].VieCoqueMax;
+            BarreVieEscorte3.NombreMembreEquipage = BatailleNavale.ListeNavire[3].VieCoqueCourant;
+            BarreVieEscorte3.VieCourante = BatailleNavale.ListeNavire[3].VieCoqueCourant;
+            BarreVieEscorte4.VieMax = BatailleNavale.ListeNavire[4].VieCoqueMax;
+            BarreVieEscorte4.NombreMembreEquipage = BatailleNavale.ListeNavire[4].VieCoqueCourant;
+            BarreVieEscorte4.VieCourante = BatailleNavale.ListeNavire[4].VieCoqueCourant;
             BoutonsTirer.Changement_Minuterie();
             BoutonsAborder.Abordage_Actif();
+            BoutonNiveau.BoutonNiveauActif();
             Niveau.Niveau = BatailleNavale.Niveau;
         }
 
@@ -451,19 +464,30 @@ namespace TP3
         {
             foreach (var x in Mer.Children.OfType<GalionEspagnole>())
             {
-                if (BatailleNavale.ListeNavire[1].NombreEquipageCourant == 0 ||
-                    BatailleNavale.ListeNavire[1].VieCoqueCourant == 0)
+                if (BatailleNavale.ListeNavire[1].VieCoqueCourant == 0)
                 {
                     _recyclage.Add(x);
+                    BarreVieGalion.Opacity = 0;
                 }
             }
 
             foreach (var x in Mer.Children.OfType<EscorteEspagnole>())
             {
-                if (BatailleNavale.ListeNavire[int.Parse((string)x.Tag)].NombreEquipageCourant == 0 ||
-                    BatailleNavale.ListeNavire[int.Parse((string)x.Tag)].VieCoqueCourant == 0)
+                if (BatailleNavale.ListeNavire[int.Parse((string)x.Tag)].VieCoqueCourant == 0)
                 {
                     _recyclage.Add(x);
+                    switch (int.Parse((string)x.Tag))
+                    {
+                        case 2:
+                            BarreVieEscorte2.Opacity = 0;
+                            break;
+                        case 3:
+                            BarreVieEscorte3.Opacity = 0;
+                            break;
+                        case 4:
+                            BarreVieEscorte4.Opacity = 0;
+                            break;
+                    }
                 }
             }
 

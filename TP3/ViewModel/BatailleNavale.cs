@@ -22,7 +22,7 @@ namespace TP3.ViewModel
         /// <summary>
         /// Propriete qui retourne le niveau actuel du joueur
         /// </summary>
-        public static int Niveau { get { return _niveau; } private set { _niveau = value; } }
+        public static int Niveau { get { return _niveau; }  set { _niveau = value; } }
 
         /// <summary>
         /// Methode qui remplit le tableau des navires au debut du jeu
@@ -75,18 +75,18 @@ namespace TP3.ViewModel
 
         public static bool VerificationFinNiveau()
         {
-            int nombreBateauxNPC = NombreBateaux - 2;
+            int nombreBateauxNPC = NombreBateaux - 1;
             int bateauxMorts = 0;
-            for (int i = 0; i < NombreBateaux; i++)
+            for (int i = 0; i < nombreBateauxNPC; i++)
             {
-                if(_listeNavire[i + 2].VieCoqueCourant == 0)
+                if(_listeNavire[i + 1].VieCoqueCourant == 0)
                 {
                     bateauxMorts++;
                 }
             }
             if(bateauxMorts == nombreBateauxNPC)
             {
-                _niveau++;
+                _listeNavire[0].NbOr += 1000;
                 return true;
             }
             return false;
