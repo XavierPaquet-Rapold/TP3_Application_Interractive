@@ -143,7 +143,7 @@
         /// </summary>
         private void CalculeVitesseNavire()
         {
-            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieEquipage());
+            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieCoque());
             if (CalculeNbVieEquipage() <= 1 / 3)
             {
                 VitesseRechargeActuel = 0;

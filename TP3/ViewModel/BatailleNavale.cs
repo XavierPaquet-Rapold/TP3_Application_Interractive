@@ -10,7 +10,7 @@ namespace TP3.ViewModel
     static class BatailleNavale
     {
         /// <summary>Nombre de bateaux du jeu</summary>
-        private const int NombreBateaux = 4;
+        private const int NombreBateaux = 5;
         /// <summary>Le niveau actuel du joueur</summary>
         private static int _niveau = 1;
         /// <summary>La liste de tous les navires en jeu</summary>

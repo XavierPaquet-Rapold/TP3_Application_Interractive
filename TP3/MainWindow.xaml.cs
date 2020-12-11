@@ -23,6 +23,8 @@ namespace TP3
 
         private int vitesseTirEnnemis = 2;
 
+        private List<Object> _recyclage = new List<object>();
+
         /// <summary>Horloge principale du jeu</summary>
         private DispatcherTimer _horloge;
 
@@ -30,7 +32,7 @@ namespace TP3
         private DispatcherTimer _horlogeEnnemis;
 
         /// <summary>La musique du jeu</summary>
-        private MediaPlayer _mediaPlayer = new MediaPlayer();
+        //private MediaPlayer _mediaPlayer = new MediaPlayer();
 
         /// <summary>Cree un rectangle pour la hitbox du joueur</summary>
         private Rect HitBoxJoueur
@@ -112,6 +114,7 @@ namespace TP3
         /// <param name="e"></param>
         private void HorlogeAvance(object sender, EventArgs e)
         {
+            DetruireRecyclage();
             DeplacerBateau();
             AnglerBateau();
             VerifierCollisionJoueurPort();
@@ -305,9 +308,10 @@ namespace TP3
             {
                 Rect HitBoxBoulets = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.ActualWidth, x.ActualHeight);
 
-                if(HitBoxBoulets.IntersectsWith(HitBoxJoueur))
+                if (HitBoxBoulets.IntersectsWith(HitBoxJoueur) && x.Tag.Equals("tirEnnemis"))
                 {
-                    //BatailleNavale.ListeNavire[0].DegatsBoulets(20);
+                    BatailleNavale.ListeNavire[0].DegatsBoulets(20);
+                    _recyclage.Add(x);
                 }
             }
         }
@@ -390,6 +394,15 @@ namespace TP3
             {
                 DeplacerBoulets(x);
             }
+        }
+
+        private void DetruireRecyclage()
+        {
+            for (int i = 0; i < _recyclage.Count; i++)
+            {
+                Mer.Children.Remove((UIElement)_recyclage[i]);
+            }
+            _recyclage.Clear();
         }
     }
 }
