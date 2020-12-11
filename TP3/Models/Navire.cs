@@ -43,7 +43,7 @@
         /// <param name="nbOr">le nombre d'or contenu dans le navire</param>
         /// <param name="nbCanonArriere">le nombre de canons a l'arriere du navire</param>
         /// <param name="nbCanonCote">le nombre de canons sur le cote du navire</param>
-        public Navire(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int nbCanonCote = 0, int nbCanonArriere = 0)
+        public Navire(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int degats, int nbCanonCote = 0, int nbCanonArriere = 0)
         {
             NombreEquipageMax = equipage;
             NombreEquipageCourant = equipage;
@@ -55,6 +55,7 @@
             NbOr = nbOr;
             NbCanonArriere = nbCanonArriere;
             NbCanonCote = nbCanonCote;
+            Degats = degats;
         }
 
         #endregion

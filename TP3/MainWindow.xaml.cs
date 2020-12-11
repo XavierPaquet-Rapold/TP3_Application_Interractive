@@ -9,7 +9,6 @@ using System.Windows.Threading;
 using TP3.Models;
 using TP3.Views;
 using TP3.ViewModel;
-using System.Windows.Media;
 using System.Collections.Generic;
 
 namespace TP3
@@ -19,9 +18,9 @@ namespace TP3
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private int TempsRechargeEnnemis = 5;
+        private int TempsRechargeEnnemis = 10;
 
-        private int vitesseTirEnnemis = 2;
+        private int vitesseTirEnnemis = 6;
 
         private List<Object> _recyclage = new List<object>();
 
@@ -101,7 +100,7 @@ namespace TP3
             _horloge.Start();
 
             _horlogeEnnemis = new DispatcherTimer();
-            _horlogeEnnemis.Interval = TimeSpan.FromSeconds(10);
+            _horlogeEnnemis.Interval = TimeSpan.FromSeconds(TempsRechargeEnnemis);
             _horlogeEnnemis.IsEnabled = true;
             _horlogeEnnemis.Tick += HorlogeEnnemisAvance;
             _horlogeEnnemis.Start();
@@ -119,9 +118,11 @@ namespace TP3
             AnglerBateau();
             VerifierCollisionJoueurPort();
             VerifierCollisionBouletsJoueur();
+            VerifierCollisonBouletsEnnemis();
             VerifierTir();
             DeplacerTir();
             ChangerProprietes();
+            VerifierSiMort();
         }
 
         private void HorlogeEnnemisAvance(object sender, EventArgs e)
@@ -310,8 +311,42 @@ namespace TP3
 
                 if (HitBoxBoulets.IntersectsWith(HitBoxJoueur) && x.Tag.Equals("tirEnnemis"))
                 {
-                    BatailleNavale.ListeNavire[0].DegatsBoulets(20);
+                    BatailleNavale.ListeNavire[0].DegatsBoulets(BatailleNavale.ListeNavire[2].Degats);
                     _recyclage.Add(x);
+                }
+            }
+        }
+
+        private void VerifierCollisonBouletsEnnemis()
+        {
+            foreach (var x in Mer.Children.OfType<BouletsCanon>())
+            {
+                Rect HitBoxBoulets = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.ActualWidth, x.ActualHeight);
+
+                if (x.Tag.Equals("tirJoueur"))
+                {
+                    foreach (var y in Mer.Children.OfType<EscorteEspagnole>())
+                    {
+                        Rect HitBoxEscorteEspagnole = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.ActualWidth, y.ActualHeight);
+
+                        if (HitBoxEscorteEspagnole.IntersectsWith(HitBoxBoulets))
+                        {
+                            BatailleNavale.ListeNavire[int.Parse((string)y.Tag)].DegatsBoulets(BatailleNavale.ListeNavire[0].Degats);
+
+                            _recyclage.Add(x);
+                        }
+                    }
+
+                    foreach (var y in Mer.Children.OfType<GalionEspagnole>())
+                    {
+                        Rect HitBoxGalionEspagnol = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.ActualWidth, y.ActualHeight);
+
+                        if (HitBoxGalionEspagnol.IntersectsWith(HitBoxBoulets))
+                        {
+                            BatailleNavale.ListeNavire[int.Parse((string)y.Tag)].DegatsBoulets(BatailleNavale.ListeNavire[0].Degats);
+                            _recyclage.Add(x);
+                        }
+                    }
                 }
             }
         }
@@ -395,7 +430,56 @@ namespace TP3
                 DeplacerBoulets(x);
             }
         }
+        private void VerifierCollisonJoueurEnnemis()
+        {
+            foreach (var x in Mer.Children.OfType<GalionEspagnole>())
+            {
+                Rect HitBoxGalionEspagnol = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.ActualWidth, x.ActualHeight);
 
+                if (HitBoxJoueur.IntersectsWith(HitBoxGalionEspagnol))
+                {
+                    BoutonsAborder.IsEnabled = true;
+                }
+                else
+                {
+                    BoutonsAborder.IsEnabled = false;
+                }
+            }
+        }
+
+        public void VerifierSiMort()
+        {
+            foreach (var x in Mer.Children.OfType<GalionEspagnole>())
+            {
+                if (BatailleNavale.ListeNavire[1].NombreEquipageCourant == 0 ||
+                    BatailleNavale.ListeNavire[1].VieCoqueCourant == 0)
+                {
+                    _recyclage.Add(x);
+                }
+            }
+
+            foreach (var x in Mer.Children.OfType<EscorteEspagnole>())
+            {
+                if (BatailleNavale.ListeNavire[int.Parse((string)x.Tag)].NombreEquipageCourant == 0 ||
+                    BatailleNavale.ListeNavire[int.Parse((string)x.Tag)].VieCoqueCourant == 0)
+                {
+                    _recyclage.Add(x);
+                }
+            }
+
+            foreach (var x in Mer.Children.OfType<BateauPirate>())
+            {
+                if (BatailleNavale.ListeNavire[0].VieCoqueCourant == 0)
+                {
+                    _recyclage.Add(x);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Methode qui enleve les elements de la liste recyclage du
+        /// front-end et vidde la liste recyclage
+        /// </summary>
         private void DetruireRecyclage()
         {
             for (int i = 0; i < _recyclage.Count; i++)

@@ -17,8 +17,8 @@
         /// <param name="nbOr">nombre d'or contenu dans le bateau</param>
         /// <param name="nombreCanonArriere">Nombre de canons a l'arriere du bateau</param>
         /// <param name="nbCanonCote">Nombre de canons sur le cote du bateau</param>
-        public NavireNPC(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int nbCanonCote = 0, int nombreCanonArriere = 0) :
-            base(equipage, coque, vitesse, vitesseRecharge, nbOr, nbCanonCote, nombreCanonArriere)
+        public NavireNPC(int equipage, int coque, double vitesse, int vitesseRecharge, int nbOr, int degats, int nbCanonCote = 0, int nombreCanonArriere = 0) :
+            base(equipage, coque, vitesse, vitesseRecharge, nbOr, degats, nbCanonCote, nombreCanonArriere)
         {
         }
         #endregion

@@ -18,8 +18,10 @@
                 </views:BateauPirate.RenderTransform>
             </views:BateauPirate>
 
+            <views:AffichageBarreVie x:Name="BarreVieGalion" Height="10" Width="100" Canvas.Left="45" Canvas.Top="100"/>
             <views:GalionEspagnole Canvas.Left="40" Canvas.Top="112" Tag="1"/>
 
+            <views:AffichageBarreVie x:Name="BarreVieEscorte2" Height="10" Width="100" Canvas.Left="790" Canvas.Top="60"/>
             <views:EscorteEspagnole Canvas.Left="737" Canvas.Top="176" Tag="2">
                 <views:EscorteEspagnole.RenderTransform>
                     <TransformGroup>
@@ -27,8 +29,8 @@
                     </TransformGroup>
                 </views:EscorteEspagnole.RenderTransform>
             </views:EscorteEspagnole>
-            
-            
+
+            <views:AffichageBarreVie x:Name="BarreVieEscorte3" Height="10" Width="100" Canvas.Left="120" Canvas.Top="480"/>
             <views:EscorteEspagnole Canvas.Left="120" Canvas.Top="501" Tag="3">
                 <views:EscorteEspagnole.RenderTransform>
                     <TransformGroup>
@@ -36,8 +38,8 @@
                     </TransformGroup>
                 </views:EscorteEspagnole.RenderTransform>
             </views:EscorteEspagnole>
-            
-            
+
+            <views:AffichageBarreVie x:Name="BarreVieEscorte4" Height="10" Width="100" Canvas.Left="1716" Canvas.Top="650"/>
             <views:EscorteEspagnole Canvas.Left="1716" Canvas.Top="663" Tag="4">
                 <views:EscorteEspagnole.RenderTransform>
                     <TransformGroup>

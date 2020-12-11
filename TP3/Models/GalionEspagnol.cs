@@ -21,6 +21,8 @@
         private const int Recharge = 15;
         /// <summary>Le nombre de vie de la coque du bateau</summary>
         private const int VieCoque = 300;
+        /// <summary>Nombre de degats infliges a l'ennemi</summary>
+        private const int Degats = 30;
         #endregion
 
         #region Constructeur
@@ -30,7 +32,7 @@
         /// <param name="niveau">Le niveau de la partie</param>
         public GalionEspagnol(int niveau) : base(NavireNPC.CalculeProprietesPositif(Equipage, niveau), 
             NavireNPC.CalculeProprietesPositif(VieCoque, niveau), Vitesse, NavireNPC.CalculeProprietesNegatif(Recharge, niveau), 
-            NavireNPC.CalculeProprietesPositif(NbOR, niveau), CanonCote, CanonArriere)
+            NavireNPC.CalculeProprietesPositif(NbOR, niveau), NavireNPC.CalculeProprietesPositif(Degats, niveau), CanonCote, CanonArriere)
         {
 
         }

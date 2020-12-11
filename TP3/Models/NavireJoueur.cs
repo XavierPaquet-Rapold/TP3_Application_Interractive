@@ -19,6 +19,8 @@ namespace TP3.Models
         private static int Equipage = 80;
         /// <summary>Nombre de pieces d'or contenu dans le bateau</summary>
         private static int NombreOr = 10000;
+        /// <summary>Nombre de degats infliges a l'ennemi</summary>
+        private static int Degats = 20;
         #endregion
 
         #region Constructeur
@@ -32,7 +34,7 @@ namespace TP3.Models
         /// <param name="degat">Augmentation des degats du navire</param>
         /// <param name="cadence"></param>
         public NavireJoueur() :
-            base(Equipage, VieCoque, Vitesse, VitesseRecharge, NombreOr, CanonCote)
+            base(Equipage, VieCoque, Vitesse, VitesseRecharge, NombreOr, Degats, CanonCote)
         {
 
         }
@@ -102,7 +104,7 @@ namespace TP3.Models
         {
             if (prix <= this.NbOr && prix > 0)
             {
-                this.Degats += 25;
+                Degats += 25;
                 this.UtilisationOr(prix);
             }
         }
