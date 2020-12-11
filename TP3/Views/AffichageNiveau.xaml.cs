@@ -10,7 +10,7 @@ namespace TP3.Views
     public partial class AffichageNiveau : UserControl
     {
         /// <summary>Enregistre le niveau du jeu</summary>
-        private int _niveau = BatailleNavale.Niveau;
+        private static int _niveau = BatailleNavale.Niveau;
         /// <summary>
         /// Getter et setter de niveau
         /// </summary>

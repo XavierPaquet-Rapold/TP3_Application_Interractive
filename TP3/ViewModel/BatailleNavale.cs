@@ -86,7 +86,6 @@ namespace TP3.ViewModel
             }
             if(bateauxMorts == nombreBateauxNPC)
             {
-                _listeNavire[0].NbOr += 1000;
                 return true;
             }
             return false;

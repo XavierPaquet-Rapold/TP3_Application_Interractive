@@ -21,6 +21,7 @@ namespace TP3.Views
         private void ChangerNiveau_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             BatailleNavale.Niveau++;
+
             BatailleNavale.InitialiserNiveau();
             ChangerNiveau.Opacity = 0;
             ChangerNiveau.IsEnabled = false;

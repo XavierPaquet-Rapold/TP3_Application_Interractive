@@ -131,6 +131,7 @@ namespace TP3
             FaireTirerEnnemis();
         }
 
+
         /// <summary>
         /// Changer les proprietes du bateau du joueur a chaque fois que l'horloge avance
         /// </summary>
