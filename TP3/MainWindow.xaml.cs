@@ -10,6 +10,7 @@ using TP3.Models;
 using TP3.Views;
 using TP3.ViewModel;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace TP3
 {
@@ -18,8 +19,16 @@ namespace TP3
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        private int TempsRechargeEnnemis = 5;
+
+        private int vitesseTirEnnemis = 2;
+
         /// <summary>Horloge principale du jeu</summary>
         private DispatcherTimer _horloge;
+
+        /// <summary>Horloge pour le tir des ennemis</summary>
+        private DispatcherTimer _horlogeEnnemis;
+
         /// <summary>La musique du jeu</summary>
         private MediaPlayer _mediaPlayer = new MediaPlayer();
 
@@ -79,14 +88,21 @@ namespace TP3
         {
             BatailleNavale.InitialiserJeu();
             InitializeComponent();
-            //_mediaPlayer.Open(new Uri(@"../../bensound-ukulele.mp3", UriKind.RelativeOrAbsolute));
+            //_mediaPlayer.Open(new Uri(@"../../soundtrack.mp3", UriKind.Relative));
             //_mediaPlayer.Play();
             DataContext = this;
+
             _horloge = new DispatcherTimer();
             _horloge.Interval = TimeSpan.FromMilliseconds(20);
             _horloge.IsEnabled = true;
             _horloge.Tick += HorlogeAvance;
             _horloge.Start();
+
+            _horlogeEnnemis = new DispatcherTimer();
+            _horlogeEnnemis.Interval = TimeSpan.FromSeconds(10);
+            _horlogeEnnemis.IsEnabled = true;
+            _horlogeEnnemis.Tick += HorlogeEnnemisAvance;
+            _horlogeEnnemis.Start();
         }
 
         /// <summary>
@@ -103,6 +119,11 @@ namespace TP3
             VerifierTir();
             DeplacerTir();
             ChangerProprietes();
+        }
+
+        private void HorlogeEnnemisAvance(object sender, EventArgs e)
+        {
+            FaireTirerEnnemis();
         }
 
         /// <summary>
@@ -208,6 +229,61 @@ namespace TP3
             AngleBateau = BateauPirate.CalculerAngle();
         }
 
+        private void FaireTirerEnnemis()
+        {
+            List<BouletsCanon> BouletsCanonsEnnemis = new List<BouletsCanon>();
+
+            foreach(var x in Mer.Children.OfType<GalionEspagnole>())
+            {
+                BouletsCanon tirEnnemis = new BouletsCanon();
+
+                switch (x.Tag)
+                {
+                    case "1":
+                        tirEnnemis.VelociteX = vitesseTirEnnemis;
+                        tirEnnemis.VelociteY = 0;
+                        break;
+                }
+                Canvas.SetLeft(tirEnnemis, (Canvas.GetLeft(x) + 75));
+                Canvas.SetTop(tirEnnemis, Canvas.GetTop(x) + 100);
+                tirEnnemis.CalculerAngle();
+                tirEnnemis.Tag = "tirEnnemis";
+                BouletsCanonsEnnemis.Add(tirEnnemis);
+            }
+
+            foreach (var x in Mer.Children.OfType<EscorteEspagnole>())
+            {
+                BouletsCanon tirEnnemis = new BouletsCanon();
+                
+                switch(x.Tag)
+                {
+                    case "2":
+                        tirEnnemis.VelociteX = 0;
+                        tirEnnemis.VelociteY = vitesseTirEnnemis;
+                        break;
+                    case "3":
+                        tirEnnemis.VelociteX = vitesseTirEnnemis;
+                        tirEnnemis.VelociteY = 0;
+                        break;
+                    case "4":
+                        tirEnnemis.VelociteX = -vitesseTirEnnemis;
+                        tirEnnemis.VelociteY = 0;
+                        break;
+                }
+
+                Canvas.SetLeft(tirEnnemis, (Canvas.GetLeft(x)));
+                Canvas.SetTop(tirEnnemis, Canvas.GetTop(x));
+                tirEnnemis.CalculerAngle();
+                tirEnnemis.Tag = "tirEnnemis";
+                BouletsCanonsEnnemis.Add(tirEnnemis);
+            }
+
+            foreach(var x in BouletsCanonsEnnemis)
+            {
+                Mer.Children.Add(x);
+            }
+        }
+
         /// <summary>
         /// Verifie les collisions du joueur avec le port
         /// </summary>
@@ -266,6 +342,7 @@ namespace TP3
                 tir.CalculerAngle();
                 tir.Tag = "tirJoueur";
                 Mer.Children.Add(tir);
+
             } else if(BoutonsTirer.TirGaucheActif) 
             {
                 BoutonsTirer.TirGaucheActif = false;
@@ -316,4 +393,3 @@ namespace TP3
         }
     }
 }
-

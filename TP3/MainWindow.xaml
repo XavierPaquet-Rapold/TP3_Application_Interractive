@@ -10,7 +10,6 @@
     <Grid>
         <Canvas x:Name="Mer" Background="#006A94">
             <views:Port x:Name="Port" Canvas.Left="1374" Canvas.Top="-115"/>
-
             <views:BateauPirate x:Name="BateauPirate" Canvas.Left="1600" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
                 <views:BateauPirate.RenderTransform>
                     <TransformGroup>
@@ -19,21 +18,41 @@
                 </views:BateauPirate.RenderTransform>
             </views:BateauPirate>
 
-            <views:GalionEspagnole Canvas.Left="154" Canvas.Top="160" RenderTransformOrigin="0.5,0.5">
-                <views:GalionEspagnole.RenderTransform>
+            <views:GalionEspagnole Canvas.Left="40" Canvas.Top="112" Tag="1"/>
+
+            <views:EscorteEspagnole Canvas.Left="737" Canvas.Top="176" Tag="2">
+                <views:EscorteEspagnole.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="90"/>
+                        <RotateTransform Angle="-90"/>
                     </TransformGroup>
-                </views:GalionEspagnole.RenderTransform>
-            </views:GalionEspagnole>
+                </views:EscorteEspagnole.RenderTransform>
+            </views:EscorteEspagnole>
+            
+            
+            <views:EscorteEspagnole Canvas.Left="120" Canvas.Top="501" Tag="3">
+                <views:EscorteEspagnole.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="0"/>
+                    </TransformGroup>
+                </views:EscorteEspagnole.RenderTransform>
+            </views:EscorteEspagnole>
+            
+            
+            <views:EscorteEspagnole Canvas.Left="1716" Canvas.Top="663" Tag="4">
+                <views:EscorteEspagnole.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="0"/>
+                    </TransformGroup>
+                </views:EscorteEspagnole.RenderTransform>
+            </views:EscorteEspagnole>
         </Canvas>
 
         <Canvas x:Name="Interface">
             <views:InterfaceTir x:Name="BoutonsTirer" Canvas.Left="760" Canvas.Top="899"/>
             <views:InterfaceAbordage x:Name="BoutonsAborder" Canvas.Left="215" Canvas.Top="899"/>
             <views:AffichageArgent x:Name="Or"/>
-            <views:AffichageEquipage Canvas.Left="85" x:Name="Equipage"/>
-            <views:AffichageNiveau Canvas.Left="200" x:Name="Niveau"/>
+            <views:AffichageEquipage Canvas.Left="123" x:Name="Equipage"/>
+            <views:AffichageNiveau Canvas.Left="238" x:Name="Niveau"/>
             <views:AffichageBarreVie x:Name="BarreVieJoueur" Height="15" Width="400" Canvas.Left="760" Canvas.Top="988"/>
         </Canvas>
     </Grid>

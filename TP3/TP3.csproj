@@ -15,6 +15,7 @@
     <None Remove="Views\Images\cadence.png" />
     <None Remove="Views\Images\canon.png" />
     <None Remove="Views\Images\degat.png" />
+    <None Remove="Views\Images\escorte_espagnole.png" />
     <None Remove="Views\Images\galion_espagnole.png" />
     <None Remove="Views\Images\or.png" />
     <None Remove="Views\Images\port.png" />
@@ -34,6 +35,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Images\degat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Images\escorte_espagnole.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Images\galion_espagnole.png">
