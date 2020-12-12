@@ -76,7 +76,6 @@
         /// <returns>Un double qui contient le pourcentage de vie de la coque restant du navire</returns>
         public double CalculeNbVieCoque()
         {
-            var a = (double)VieCoqueCourant / (double)VieCoqueMax;
             return (double)VieCoqueCourant / (double)VieCoqueMax;
         }
 
