@@ -130,10 +130,6 @@
         private void CalculeVitesseNavire()
         {
             VitesseNavire = (int)(VitesseNavire * CalculeNbVieCoque());
-            if (CalculeNbVieCoque() <= 0.33)
-            {
-                VitesseNavire = 0;
-            }
         }
 
         /// <summary>
@@ -142,11 +138,7 @@
         /// </summary>
         private void CalculeVitesseRecharge()
         {
-            VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieEquipage());
-            if (CalculeNbVieEquipage() <= 0.33)
-            {
-                VitesseRechargeActuel = 10000;
-            }
+            VitesseRechargeActuel = (int)(VitesseRechargeActuel / (CalculeNbVieEquipage()));
         }
 
         #endregion

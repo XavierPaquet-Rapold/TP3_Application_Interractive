@@ -39,7 +39,7 @@ namespace TP3.Views
         /// </summary>
         public void Abordage_Actif()
         {
-            if (BatailleNavale.ListeNavire[1].NombreEquipageCourant > 0 && BatailleNavale.ListeNavire[1].CalculeNbVieCoque() < 0.5)
+            if (BatailleNavale.ListeNavire[1].NombreEquipageCourant > 0 && BatailleNavale.ListeNavire[1].CalculeNbVieCoque() <= 0.5)
             {
                 Abordage.IsEnabled = true;
             }

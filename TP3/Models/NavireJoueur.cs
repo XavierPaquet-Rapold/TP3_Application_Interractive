@@ -14,7 +14,7 @@ namespace TP3.Models
         /// <summary>La vitesse du bateau</summary>
         private static double Vitesse = 2;
         /// <summary>La vitesse de recharge des canons du bateau</summary>
-        private static int VitesseRecharge = 8;
+        private static int VitesseRecharge = 5;
         /// <summary>Nombre d'equipage du bateau</summary>
         private static int Equipage = 80;
         /// <summary>Nombre de pieces d'or contenu dans le bateau</summary>
@@ -129,7 +129,15 @@ namespace TP3.Models
         /// <param name="or">Le nombre d'or du bateau ennemi</param>
         public void Abordage(int equipage, int or)
         {
-            this.NombreEquipageCourant += equipage / 2;
+            if(this.NombreEquipageCourant + equipage / 2 < this.NombreEquipageMax)
+            {
+                this.NombreEquipageCourant += equipage / 2;
+            }
+            else
+            {
+                this.NombreEquipageCourant = this.NombreEquipageMax;
+            }
+            
             this.NbOr += or;
         }
         #endregion

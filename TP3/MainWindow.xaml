@@ -10,7 +10,7 @@
     <Grid x:Name="Jeu">
         <Canvas x:Name="Mer" Background="#006A94">
             <views:Port x:Name="Port" Canvas.Left="1374" Canvas.Top="-115"/>
-            <views:BateauPirate x:Name="BateauPirate" Canvas.Left="1600" Canvas.Top="435" RenderTransformOrigin="0.5,0.5">
+            <views:BateauPirate x:Name="BateauPirate" Canvas.Left="960" Canvas.Top="500" RenderTransformOrigin="0.5,0.5">
                 <views:BateauPirate.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="{Binding Path=AngleBateau}"/>

@@ -110,22 +110,32 @@ namespace TP3.Views
                 {
                     case "Reparation":
                         temp.ReparationCoque(PrixAmelioration);
+                        PrixAmelioration += 5;
                         break;
                     case "Recruter":
                         temp.AjoutEquipage(PrixAmelioration);
+                        PrixAmelioration += 5;
                         break;
                     case "Resistance":
                         temp.AjoutCoque(PrixAmelioration);
+                        PrixAmelioration += 5;
                         break;
                     case "Vitesse":
                         temp.AjoutVitesse(PrixAmelioration);
+                        PrixAmelioration += 5;
                         break;
                     case "CadenceTir":
-                        temp.AjoutCadence(PrixAmelioration);
+                        if(BatailleNavale.ListeNavire[0].VitesseRechargeMax > 0)
+                        {
+                            temp.AjoutCadence(PrixAmelioration);
+                            PrixAmelioration += 5;
+                        }
+                        else{
+                            btn.IsEnabled = false;
+                        }
                         break;
                 }
                 BatailleNavale.ListeNavire[0] = temp;
-                PrixAmelioration += 5;
             }
         }
     }

@@ -20,7 +20,7 @@
         /// <summary>La vitesse de recharge des canons du bateau au niveau 1</summary>
         private const int Recharge = 5;
         /// <summary>Le nombre de vie de la coque du bateau</summary>
-        private const int VieCoque = 150;
+        private const int VieCoque = 50;
         /// <summary>Nombre de degats infliges a l'ennemi</summary>
         private const int Degats = 20;
         #endregion

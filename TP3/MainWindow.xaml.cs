@@ -34,7 +34,7 @@ namespace TP3
         private DispatcherTimer _horlogeEnnemis;
 
         /// <summary>La musique du jeu</summary>
-        //private MediaPlayer _mediaPlayer = new MediaPlayer();
+        private MediaPlayer _mediaPlayer = new MediaPlayer();
 
         /// <summary>Cree un rectangle pour la hitbox du joueur</summary>
         private Rect HitBoxJoueur
@@ -97,13 +97,35 @@ namespace TP3
 
             BatailleNavale.InitialiserJeu();
             InitializeComponent();
-            //_mediaPlayer.Open(new Uri(@"../../soundtrack.mp3", UriKind.Relative));
-            //_mediaPlayer.Play();
             DataContext = this;
 
             InitialiserMenu();
 
+            InitialiserMusiqueFond();
+
             DataContext = this;
+        }
+
+        /// <summary>
+        /// Initialise la musique de fond
+        /// </summary>
+        private void InitialiserMusiqueFond()
+        {
+            _mediaPlayer.Open(new Uri(@"soundtrack.wav", UriKind.Relative));
+            _mediaPlayer.MediaEnded += new EventHandler(MusiqueFini);
+            _mediaPlayer.Volume = 0.5;
+            _mediaPlayer.Play();
+        }
+
+        /// <summary>
+        /// Rejoue la musique lorsqu'elle eest finit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MusiqueFini(object sender, EventArgs e)
+        {
+            _mediaPlayer.Position = TimeSpan.Zero;
+            _mediaPlayer.Play();
         }
 
         /// <summary>
