@@ -345,7 +345,7 @@ namespace TP3
         /// </summary>
         private void VerifierCollisionJoueurPort()
         {
-            if(HitBoxJoueur.IntersectsWith(HitBoxPort))
+            if(HitBoxJoueur.IntersectsWith(HitBoxPort) && BatailleNavale.VerificationFinNiveau())
             {
                 _horloge.Stop();
                 OuvrirFenetreBoutique();

@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
     /// Interaction logic for AffichageNiveau.xaml
     /// </summary>
-    public partial class AffichageNiveau : UserControl
+    public partial class AffichageNiveau : INotifyPropertyChanged
     {
         /// <summary>Enregistre le niveau du jeu</summary>
         private static int _niveau = BatailleNavale.Niveau;
