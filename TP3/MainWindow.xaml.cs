@@ -24,6 +24,9 @@ namespace TP3
 
         private List<Object> _recyclage = new List<object>();
 
+        /// <summary>Horloge du menu</summary>
+        private DispatcherTimer _horlogeMenu;
+
         /// <summary>Horloge principale du jeu</summary>
         private DispatcherTimer _horloge;
 
@@ -87,12 +90,26 @@ namespace TP3
         /// </summary>
         public MainWindow()
         {
+            _horlogeMenu = new DispatcherTimer();
+            _horlogeMenu.Interval = TimeSpan.FromMilliseconds(20);
+            _horlogeMenu.IsEnabled = true;
+            _horlogeMenu.Tick += HorlogeMenuAvance;
+            _horlogeMenu.Start();
+
             BatailleNavale.InitialiserJeu();
             InitializeComponent();
             //_mediaPlayer.Open(new Uri(@"../../soundtrack.mp3", UriKind.Relative));
             //_mediaPlayer.Play();
             DataContext = this;
 
+            Views.Menu menu = new Views.Menu();
+            Jeu.Children.Add(menu);
+
+            DataContext = this;
+        }
+
+        private void InitialiserJeu()
+        {
             _horloge = new DispatcherTimer();
             _horloge.Interval = TimeSpan.FromMilliseconds(20);
             _horloge.IsEnabled = true;
@@ -104,6 +121,11 @@ namespace TP3
             _horlogeEnnemis.IsEnabled = true;
             _horlogeEnnemis.Tick += HorlogeEnnemisAvance;
             _horlogeEnnemis.Start();
+        }
+
+        private void HorlogeMenuAvance(object sender, EventArgs e)
+        {
+            VerifierCommencerJeu();
         }
 
         /// <summary>
@@ -131,6 +153,22 @@ namespace TP3
             FaireTirerEnnemis();
         }
 
+        private void VerifierCommencerJeu()
+        {
+            var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
+            if (menu._jeuCommence)
+            {
+                QuiterMenu();
+            }
+        }
+
+        private void QuiterMenu()
+        {
+            _horlogeMenu.Stop();
+            var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
+            Jeu.Children.Remove(menu);
+            InitialiserJeu();
+        }
 
         /// <summary>
         /// Changer les proprietes du bateau du joueur a chaque fois que l'horloge avance
