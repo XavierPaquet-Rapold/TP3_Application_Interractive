@@ -14,6 +14,7 @@ namespace TP3.Views
 
         public Menu()
         {
+            _jeuCommence = false;
             InitializeComponent();
             Tutoriel.Opacity = 0;
         }
