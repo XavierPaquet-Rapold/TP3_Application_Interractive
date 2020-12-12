@@ -133,15 +133,8 @@ namespace TP3.Models
         /// <param name="or">Le nombre d'or du bateau ennemi</param>
         public void Abordage(int equipage, int or)
         {
-            if (this.NombreEquipageCourant * 5 > equipage)
-            {
-                    this.NombreEquipageCourant += equipage / 2;
-                    this.NbOr += or;
-            }
-            else
-            {
-                this.NombreEquipageCourant = 0;
-            }
+            this.NombreEquipageCourant += equipage / 2;
+            this.NbOr += or;
         }
         #endregion
     }

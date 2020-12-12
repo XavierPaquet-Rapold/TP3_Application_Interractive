@@ -71,6 +71,7 @@ namespace TP3.ViewModel
                         break;
                 }
             }
+
         }
 
         public static bool VerificationFinNiveau()

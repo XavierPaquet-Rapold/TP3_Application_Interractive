@@ -158,11 +158,11 @@ namespace TP3
             var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
             if (menu._jeuCommence)
             {
-                QuiterMenu();
+                QuitterMenu();
             }
         }
 
-        private void QuiterMenu()
+        private void QuitterMenu()
         {
             _horlogeMenu.Stop();
             var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
