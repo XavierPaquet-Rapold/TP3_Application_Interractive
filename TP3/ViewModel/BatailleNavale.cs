@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TP3.Models;
-using TP3.Views;
 
 namespace TP3.ViewModel
 {
@@ -29,6 +28,7 @@ namespace TP3.ViewModel
         /// </summary>
         public static void InitialiserJeu()
         {
+            Niveau = 1;
             ListeNavire = new List<Navire>();
             ListeNavire.Clear();
             for (int i = 0; i < NombreBateaux; i++)
@@ -71,9 +71,12 @@ namespace TP3.ViewModel
                         break;
                 }
             }
-
         }
 
+        /// <summary>
+        /// Verifie si les bateaux ennemis sont morts
+        /// </summary>
+        /// <returns>Retourne si les ennemis sont morts</returns>
         public static bool VerificationFinNiveau()
         {
             int nombreBateauxNPC = NombreBateaux - 1;

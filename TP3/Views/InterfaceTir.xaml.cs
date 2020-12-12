@@ -22,8 +22,8 @@ namespace TP3.Views
         /// </summary>
         private DispatcherTimer _horlogeGauche;
 
-        public bool TirDroitActif = false;
-        public bool TirGaucheActif = false;
+        public bool _tirDroitActif = false;
+        public bool _tirGaucheActif = false;
 
         /// <summary>
         /// Initialise l'interface de tir
@@ -77,7 +77,7 @@ namespace TP3.Views
         {
             _horlogeGauche.Interval = TimeSpan.FromSeconds(TpsRechargement);
             Rechargement(TirGauche);
-            TirGaucheActif = true;
+            _tirGaucheActif = true;
         }
 
         /// <summary>
@@ -89,13 +89,13 @@ namespace TP3.Views
         {
             _horlogeDroite.Interval = TimeSpan.FromSeconds(TpsRechargement);
             Rechargement(TirDroite);
-            TirDroitActif = true;
+            _tirDroitActif = true;
         }
 
         /// <summary>
         /// Gestion du rechargement : lance une horloge si un bouton de tir est pressee.
         /// </summary>
-        /// <param name="bouton"></param>
+        /// <param name="bouton">Bouton touche</param>
         private void Rechargement(Button bouton)
         {
             bouton.IsEnabled = false;

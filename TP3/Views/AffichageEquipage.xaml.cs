@@ -12,6 +12,10 @@ namespace TP3.Views
         /// Nombre d'equipage courant du bateau du joueur
         /// </summary>
         private int _nombreMembreEquipage = BatailleNavale.ListeNavire[0].NombreEquipageCourant;
+
+        /// <summary>
+        /// Setter et getter du nombre de membre d'equipage
+        /// </summary>
         public int NombreMembreEquipage
         {
             get { return _nombreMembreEquipage; }

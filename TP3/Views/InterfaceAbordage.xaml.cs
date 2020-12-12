@@ -25,15 +25,12 @@ namespace TP3.Views
         /// <param name="e"></param>
         private void Abordage_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if(BatailleNavale.ListeNavire[0].NombreEquipageCourant * 5 > BatailleNavale.ListeNavire[1].NombreEquipageCourant)
-            {
-                NavireJoueur joueur = (NavireJoueur)BatailleNavale.ListeNavire[0];
-                GalionEspagnol galion = (GalionEspagnol)BatailleNavale.ListeNavire[1];
-                joueur.Abordage(galion.NombreEquipageCourant, galion.NbOr);
-                galion.Abordage();
-                BatailleNavale.ListeNavire[0] = joueur;
-                BatailleNavale.ListeNavire[1] = galion;
-            }
+            NavireJoueur joueur = (NavireJoueur)BatailleNavale.ListeNavire[0];
+            GalionEspagnol galion = (GalionEspagnol)BatailleNavale.ListeNavire[1];
+            joueur.Abordage(galion.NombreEquipageCourant, galion.NbOr);
+            galion.Abordage();
+            BatailleNavale.ListeNavire[0] = joueur;
+            BatailleNavale.ListeNavire[1] = galion;
             Abordage.IsEnabled = false;
         }
 

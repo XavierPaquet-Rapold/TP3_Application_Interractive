@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-
+using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>
@@ -8,7 +8,9 @@ namespace TP3.Views
     /// </summary>
     public partial class Menu : UserControl
     {
-        public bool _jeuCommence = false;
+        private bool _jeuCommence = false;
+
+        public bool JeuCommence { get { return _jeuCommence; } private set { _jeuCommence = value; } }
 
         public Menu()
         {
@@ -26,6 +28,7 @@ namespace TP3.Views
 
         private void Jouer_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            BatailleNavale.InitialiserJeu();
             _jeuCommence = true;
         }
 

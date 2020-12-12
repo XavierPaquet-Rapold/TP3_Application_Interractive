@@ -76,7 +76,6 @@ namespace TP3.Views
             {
                 angle = 0;
             }
-
             return angle;
         }
 

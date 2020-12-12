@@ -18,31 +18,31 @@ namespace TP3.Views
 
             AmeliorationTemplate Reparation = new AmeliorationTemplate("Reparation");
             Reparation.LienImage = "Images/reparer.png";
-            Reparation.PrixAmelioration = 500;
+            Reparation.PrixAmelioration = 250;
             Reparation.NomAmelioration = "Réparer";
             Fenetre.Children.Add(Reparation);
 
             AmeliorationTemplate Recruter = new AmeliorationTemplate("Recruter");
             Recruter.LienImage = "Images/recruter.png";
-            Recruter.PrixAmelioration = 500;
+            Recruter.PrixAmelioration = 250;
             Recruter.NomAmelioration = "Recruter";
             Fenetre.Children.Add(Recruter);
 
             AmeliorationTemplate AmeliorationResistance = new AmeliorationTemplate("Resistance");
             AmeliorationResistance.LienImage = "Images/armure.png";
-            AmeliorationResistance.PrixAmelioration = 500;
+            AmeliorationResistance.PrixAmelioration = 250;
             AmeliorationResistance.NomAmelioration = "+ Résistance";
             Fenetre.Children.Add(AmeliorationResistance);
 
             AmeliorationTemplate AmeliorationVitesse = new AmeliorationTemplate("Vitesse");
             AmeliorationVitesse.LienImage = "Images/vitesse.png";
-            AmeliorationVitesse.PrixAmelioration = 800;
+            AmeliorationVitesse.PrixAmelioration = 300;
             AmeliorationVitesse.NomAmelioration = "+ Vitesse";
             Fenetre.Children.Add(AmeliorationVitesse);
 
             AmeliorationTemplate AmeliorationCadenceTir = new AmeliorationTemplate("CadenceTir");
             AmeliorationCadenceTir.LienImage = "Images/canon.png";
-            AmeliorationCadenceTir.PrixAmelioration = 800;
+            AmeliorationCadenceTir.PrixAmelioration = 300;
             AmeliorationCadenceTir.NomAmelioration = "+ Cadence";
             Fenetre.Children.Add(AmeliorationCadenceTir);
 

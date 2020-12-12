@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using TP3.ViewModel;
 namespace TP3.Views
 {
     /// <summary>

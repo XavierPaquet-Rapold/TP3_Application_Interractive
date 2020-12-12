@@ -32,7 +32,11 @@
         /// <returns>La propriete augmente selon le niveau</returns>
         internal static int CalculeProprietesPositif(int propriete, int niveau)
         {
-            return propriete * (1 + (niveau / 10));
+            if(niveau > 1)
+            {
+                return (int)(propriete * (1 + (niveau * 0.25)));
+            }
+            return propriete;
         }
 
         /// <summary>
@@ -43,7 +47,11 @@
         /// <returns>La propriete augmente selon le niveau</returns>
         internal static int CalculeProprietesNegatif(int propriete, int niveau)
         {
-            return propriete * (1 - (niveau / 10));
+            if (niveau > 1)
+            {
+                return (int)(propriete * (1 - (niveau / 4)));
+            }
+            return propriete;
         }
         #endregion
     }

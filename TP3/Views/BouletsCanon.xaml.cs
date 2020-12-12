@@ -11,20 +11,20 @@ namespace TP3.Views
         /// <summary>
         /// Distance parcourue par le boulet
         /// </summary>
-        public double DistanceParcourue = 0;
+        public double _distanceParcourue = 0;
         /// <summary>
         /// Vitesse du boulet
         /// </summary>
-        public double vitesseBoulets = 5;
+        public double _vitesseBoulet = 5;
 
         /// <summary>
-        /// Volocite du boulet dans l'axe X
+        /// Velocite du boulet dans l'axe X
         /// </summary>
-        public double VelociteX { get; set; } = 0;
+        public double _velociteX { get; set; } = 0;
         /// <summary>
         /// Volocite du boulet dans l'axe Y
         /// </summary>
-        public double VelociteY { get; set; } = 0;
+        public double _velociteY { get; set; } = 0;
 
         /// <summary>
         /// Initialisation des boulets de canon
@@ -37,19 +37,19 @@ namespace TP3.Views
         /// <summary>
         /// Calcule la drection dans laquelle doivent aller les boulets de canon.
         /// </summary>
-        /// <param name="VBateauX">Velocite du navire dans l'axe X</param>
-        /// <param name="VBateauY">Velocite du navire dans l'axe Y</param>
+        /// <param name="vBateauX">Velocite du navire dans l'axe X</param>
+        /// <param name="vBateauY">Velocite du navire dans l'axe Y</param>
         /// <param name="cote">cote du navire duquel le boulet est tire</param>
-        public void CalculerDirection(double VBateauX, double VBateauY, bool cote) 
+        public void CalculerDirection(double vBateauX, double vBateauY, bool cote) 
         {
             if(cote)
             {
-                VelociteX = -VBateauY * vitesseBoulets;
-                VelociteY = VBateauX * vitesseBoulets;
+                _velociteX = -vBateauY * _vitesseBoulet;
+                _velociteY = vBateauX * _vitesseBoulet;
             } else
             {
-                VelociteX = VBateauY * vitesseBoulets;
-                VelociteY = -VBateauX * vitesseBoulets;
+                _velociteX = vBateauY * _vitesseBoulet;
+                _velociteY = -vBateauX * _vitesseBoulet;
             }
         }
 
@@ -58,7 +58,7 @@ namespace TP3.Views
         /// </summary>
         public void CalculerAngle()
         {
-            RotationImage.Angle = Math.Round(Math.Atan(VelociteY / VelociteX) * 180 / Math.PI);
+            RotationImage.Angle = Math.Round(Math.Atan(_velociteY / _velociteX) * 180 / Math.PI);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace TP3.Views
         /// </summary>
         public void StopX()
         {
-            VelociteX = 0;
+            _velociteX = 0;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace TP3.Views
         /// </summary>
         public void StopY()
         {
-            VelociteY = 0;
+            _velociteY = 0;
         }
 
         /// <summary>

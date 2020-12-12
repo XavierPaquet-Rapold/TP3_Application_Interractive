@@ -6,7 +6,6 @@
     class Navire
     {
         #region proprietes
-
         /// <summary>Contient le nombre d'equipage du navire lors de sa creation</summary>
         public int NombreEquipageMax { get; internal set; }
         /// <summary>Contient le nombre d'equipage restant apres les attaques</summary>
@@ -19,6 +18,7 @@
         public double VitesseNavire { get; internal set; }
         /// <summary>Degats infliges lorsque boulet touche le navire ennemi</summary>
         public int Degats { get; internal set; }
+        /// <summary>Vitesse de recharge maximum des bateaux</summary>
         public int VitesseRechargeMax { get; internal set; }
         /// <summary>Contient la vitesse de recharge maximale actuelle du navire a tout moment de la partie</summary>
         public int VitesseRechargeActuel { get; internal set; }
@@ -105,21 +105,6 @@
         }
 
         /// <summary>
-        /// Methode qui gere les evenements suivant une collision entre les
-        /// navires
-        /// </summary>
-        /// <param name="viePerdu">Nombre de dommages a la coque</param>
-        public void DegatsCoque(int viePerdu)
-        {
-            VieCoqueCourant -= viePerdu;
-            if (VieCoqueCourant < 0)
-            {
-                VieCoqueCourant = 0;
-            }
-            CalculeVitesseNavire();
-        }
-
-        /// <summary>
         /// Methode qui fait les modification sur le nombre d'or d'un navire
         /// </summary>
         /// <param name="orUtilise">Or vole ou utilise par le navire</param>
@@ -145,7 +130,7 @@
         private void CalculeVitesseNavire()
         {
             VitesseNavire = (int)(VitesseNavire * CalculeNbVieCoque());
-            if (CalculeNbVieCoque() <= 1 / 3)
+            if (CalculeNbVieCoque() <= 0.33)
             {
                 VitesseNavire = 0;
             }
@@ -158,7 +143,7 @@
         private void CalculeVitesseRecharge()
         {
             VitesseRechargeActuel = (int)(VitesseRechargeActuel * CalculeNbVieEquipage());
-            if (CalculeNbVieEquipage() <= 1 / 3)
+            if (CalculeNbVieEquipage() <= 0.33)
             {
                 VitesseRechargeActuel = 10000;
             }

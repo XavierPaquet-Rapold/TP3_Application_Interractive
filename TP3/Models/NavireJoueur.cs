@@ -12,13 +12,13 @@ namespace TP3.Models
         /// <summary>Le nombre de vie de la coque du bateau</summary>
         private static int VieCoque = 100;
         /// <summary>La vitesse du bateau</summary>
-        private static double Vitesse = 5;
+        private static double Vitesse = 2;
         /// <summary>La vitesse de recharge des canons du bateau</summary>
-        private static int VitesseRecharge = 0;
+        private static int VitesseRecharge = 8;
         /// <summary>Nombre d'equipage du bateau</summary>
         private static int Equipage = 80;
         /// <summary>Nombre de pieces d'or contenu dans le bateau</summary>
-        private static int NombreOr = 10000;
+        private static int NombreOr = 0;
         /// <summary>Nombre de degats infliges a l'ennemi</summary>
         private static int Degats = 20;
         #endregion
@@ -58,7 +58,6 @@ namespace TP3.Models
         /// Methode qui repare la coque lorsque le joueur l'achete
         /// </summary>
         /// <param name="prix">Le prix de l'achat</param>
-        /// <returns></returns>
         public void ReparationCoque(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
@@ -71,7 +70,6 @@ namespace TP3.Models
         /// Methode qui ajoute des membres d'equipage lorsque le joueur l'achete
         /// </summary>
         /// <param name="prix">Le prix de l'achat</param>
-        /// <returns></returns>
         public void AjoutEquipage(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
@@ -85,7 +83,6 @@ namespace TP3.Models
         /// Methode qui ajoute de la vietesse au bateau lorsque le joueur l'achete
         /// </summary>
         /// <param name="prix">Le prix de l'achat</param>
-        /// <returns></returns>
         public void AjoutVitesse(int prix)
         {
             if (prix <= this.NbOr && prix > 0)
@@ -99,7 +96,6 @@ namespace TP3.Models
         /// Methode qui ajoute des degats a chaque boulets lorsque le joueur l'achete
         /// </summary>
         /// <param name="prix">Le prix de l'achat</param>
-        /// <returns></returns>
         public void AjoutDegats(int prix)
         {
             if (prix <= this.NbOr && prix > 0)

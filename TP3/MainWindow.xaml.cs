@@ -14,15 +14,14 @@ using System.Windows.Media;
 
 namespace TP3
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// <summary>Interaction logic for MainWindow.xaml</summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private int TempsRechargeEnnemis = 20;
-
-        private int vitesseTirEnnemis = 6;
-
+        /// <summary>Temps de rechargement des ennemis</summary>
+        private int _tempsRechargeEnnemis = 10;
+        /// <summary>Vitesse des tirs ennemis</summary>
+        private int _vitesseTirEnnemis = 6;
+        /// <summary>Liste qui contient les elements a detruire</summary>
         private List<Object> _recyclage = new List<object>();
 
         /// <summary>Horloge du menu</summary>
@@ -64,7 +63,7 @@ namespace TP3
             get { return _angleBateau; }
             set
             {
-                if(_angleBateau != value)
+                if (_angleBateau != value)
                 {
                     _angleBateau = value;
                     NotifyPropertyChanged();
@@ -95,7 +94,6 @@ namespace TP3
             _horlogeMenu.Interval = TimeSpan.FromMilliseconds(20);
             _horlogeMenu.IsEnabled = true;
             _horlogeMenu.Tick += HorlogeMenuAvance;
-            _horlogeMenu.Start();
 
             BatailleNavale.InitialiserJeu();
             InitializeComponent();
@@ -103,12 +101,23 @@ namespace TP3
             //_mediaPlayer.Play();
             DataContext = this;
 
-            Views.Menu menu = new Views.Menu();
-            Jeu.Children.Add(menu);
+            InitialiserMenu();
 
             DataContext = this;
         }
 
+        /// <summary>
+        /// Initialise l'affichage du menu de depart
+        /// </summary>
+        private void InitialiserMenu()
+        {
+            Views.Menu menu = new Views.Menu();
+            Jeu.Children.Add(menu);
+            _horlogeMenu.Start();
+        }
+        /// <summary>
+        /// Initialise le jeu au depart
+        /// </summary>
         private void InitialiserJeu()
         {
             _horloge = new DispatcherTimer();
@@ -118,7 +127,7 @@ namespace TP3
             _horloge.Start();
 
             _horlogeEnnemis = new DispatcherTimer();
-            _horlogeEnnemis.Interval = TimeSpan.FromSeconds(TempsRechargeEnnemis);
+            _horlogeEnnemis.Interval = TimeSpan.FromSeconds(_tempsRechargeEnnemis);
             _horlogeEnnemis.IsEnabled = true;
             _horlogeEnnemis.Tick += HorlogeEnnemisAvance;
             _horlogeEnnemis.Start();
@@ -126,6 +135,11 @@ namespace TP3
             InitialiserNavires();
         }
 
+        /// <summary>
+        /// Verifie si le jeu commence a chaque fois que l'horloge du menu avance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorlogeMenuAvance(object sender, EventArgs e)
         {
             VerifierCommencerJeu();
@@ -148,23 +162,35 @@ namespace TP3
             DeplacerTir();
             ChangerProprietes();
             VerifierSiMort();
+            DetruireBoulets();
             DetruireRecyclage();
         }
 
+        /// <summary>
+        /// Fait tirer l'ennemis des qu'il en a la possibilite
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorlogeEnnemisAvance(object sender, EventArgs e)
         {
             FaireTirerEnnemis();
         }
 
+        /// <summary>
+        /// Si le joueur appuie sur le bouton commencer le jeu, quitte le menu
+        /// </summary>
         private void VerifierCommencerJeu()
         {
             var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
-            if (menu._jeuCommence)
+            if (menu.JeuCommence)
             {
                 QuitterMenu();
             }
         }
 
+        /// <summary>
+        /// Quitte le menu de depart
+        /// </summary>
         private void QuitterMenu()
         {
             _horlogeMenu.Stop();
@@ -173,7 +199,10 @@ namespace TP3
             InitialiserJeu();
         }
 
-        private void InitialiserNavires()
+        /// <summary>
+        /// Initialise les navires au debut du jeu et a chaque niveau
+        /// </summary>
+        public void InitialiserNavires()
         {
             RotateTransform rotate = new RotateTransform(-90);
 
@@ -202,10 +231,15 @@ namespace TP3
             Mer.Children.Add(Escorte1);
             Mer.Children.Add(Escorte2);
             Mer.Children.Add(Escorte3);
+
+            BarreVieGalion.Opacity = 1;
+            BarreVieEscorte2.Opacity = 1;
+            BarreVieEscorte3.Opacity = 1;
+            BarreVieEscorte4.Opacity = 1;
         }
 
         /// <summary>
-        /// Changer les proprietes du bateau du joueur a chaque fois que l'horloge avance
+        /// Changer les proprietes du bateau du joueur et de l'affichage a chaque fois que l'horloge avance
         /// </summary>
         public void ChangerProprietes()
         {
@@ -230,6 +264,15 @@ namespace TP3
             BoutonsAborder.Abordage_Actif();
             BoutonNiveau.BoutonNiveauActif();
             Niveau.Niveau = BatailleNavale.Niveau;
+            if (BoutonNiveau.NiveauCommence)
+            {
+                InitialiserNavires();
+                BoutonNiveau.NiveauCommence = false;
+                if(_tempsRechargeEnnemis > 2)
+                {
+                    _tempsRechargeEnnemis--;
+                }
+            }
         }
 
         /// <summary>
@@ -318,7 +361,9 @@ namespace TP3
         {
             AngleBateau = BateauPirate.CalculerAngle();
         }
-
+        /// <summary>
+        /// Fait tirer les ennemis a chaque fois qu'ils peuvent
+        /// </summary>
         private void FaireTirerEnnemis()
         {
             List<BouletsCanon> BouletsCanonsEnnemis = new List<BouletsCanon>();
@@ -330,8 +375,8 @@ namespace TP3
                 switch (x.Tag)
                 {
                     case "1":
-                        tirEnnemis.VelociteX = vitesseTirEnnemis;
-                        tirEnnemis.VelociteY = 0;
+                        tirEnnemis._velociteX = _vitesseTirEnnemis;
+                        tirEnnemis._velociteY = 0;
                         break;
                 }
                 Canvas.SetLeft(tirEnnemis, (Canvas.GetLeft(x) + 75));
@@ -348,16 +393,16 @@ namespace TP3
                 switch(x.Tag)
                 {
                     case "2":
-                        tirEnnemis.VelociteX = 0;
-                        tirEnnemis.VelociteY = vitesseTirEnnemis;
+                        tirEnnemis._velociteX = 0;
+                        tirEnnemis._velociteY = _vitesseTirEnnemis;
                         break;
                     case "3":
-                        tirEnnemis.VelociteX = vitesseTirEnnemis;
-                        tirEnnemis.VelociteY = 0;
+                        tirEnnemis._velociteX = _vitesseTirEnnemis;
+                        tirEnnemis._velociteY = 0;
                         break;
                     case "4":
-                        tirEnnemis.VelociteX = -vitesseTirEnnemis;
-                        tirEnnemis.VelociteY = 0;
+                        tirEnnemis._velociteX = -_vitesseTirEnnemis;
+                        tirEnnemis._velociteY = 0;
                         break;
                 }
 
@@ -443,10 +488,10 @@ namespace TP3
         /// <param name="x"></param>
         private void DeplacerBoulets(BouletsCanon x)
         {
-            double nextX = Canvas.GetLeft(x) + x.VelociteX;
+            double nextX = Canvas.GetLeft(x) + x._velociteX;
             Canvas.SetLeft(x, nextX);
 
-            double nextY = Canvas.GetTop(x) + x.VelociteY;
+            double nextY = Canvas.GetTop(x) + x._velociteY;
             Canvas.SetTop(x, nextY);
         }
 
@@ -455,9 +500,9 @@ namespace TP3
         /// </summary>
         private void VerifierTir()
         {
-            if(BoutonsTirer.TirDroitActif)
+            if(BoutonsTirer._tirDroitActif)
             {
-                BoutonsTirer.TirDroitActif = false;
+                BoutonsTirer._tirDroitActif = false;
 
                 BouletsCanon tir = new BouletsCanon();
                 Canvas.SetLeft(tir, (Canvas.GetLeft(BateauPirate)));
@@ -468,9 +513,9 @@ namespace TP3
                 tir.Tag = "tirJoueur";
                 Mer.Children.Add(tir);
 
-            } else if(BoutonsTirer.TirGaucheActif) 
+            } else if(BoutonsTirer._tirGaucheActif) 
             {
-                BoutonsTirer.TirGaucheActif = false;
+                BoutonsTirer._tirGaucheActif = false;
 
                 BouletsCanon tir = new BouletsCanon();
                 Canvas.SetLeft(tir, Canvas.GetLeft(BateauPirate));
@@ -516,6 +561,9 @@ namespace TP3
                 DeplacerBoulets(x);
             }
         }
+        /// <summary>
+        /// Verifie si la collision du bateau du joueur avec celui des ennemis
+        /// </summary>
         private void VerifierCollisonJoueurEnnemis()
         {
             foreach (var x in Mer.Children.OfType<GalionEspagnole>())
@@ -532,7 +580,9 @@ namespace TP3
                 }
             }
         }
-
+        /// <summary>
+        /// Verifie si des bateaux sont morts
+        /// </summary>
         public void VerifierSiMort()
         {
             foreach (var x in Mer.Children.OfType<GalionEspagnole>())
@@ -568,6 +618,24 @@ namespace TP3
             {
                 if (BatailleNavale.ListeNavire[0].VieCoqueCourant == 0)
                 {
+                    _recyclage.Add(x);
+                    InitialiserMenu();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Methode qui detruit des boulets de canons 
+        /// qui on disparu de l'ecran du joueur
+        /// </summary>
+        private void DetruireBoulets()
+        {
+            foreach (var x in Mer.Children.OfType<BouletsCanon>())
+            {
+                if (Canvas.GetLeft(x) <= 0 || Canvas.GetLeft(x) >= Mer.ActualWidth)
+                {
+                    _recyclage.Add(x);
+                } else if (Canvas.GetTop(x) <= 0 || Canvas.GetTop(x) >= Mer.ActualHeight) {
                     _recyclage.Add(x);
                 }
             }
