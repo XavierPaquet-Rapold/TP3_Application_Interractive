@@ -10,6 +10,7 @@ using TP3.Models;
 using TP3.Views;
 using TP3.ViewModel;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace TP3
 {
@@ -121,6 +122,8 @@ namespace TP3
             _horlogeEnnemis.IsEnabled = true;
             _horlogeEnnemis.Tick += HorlogeEnnemisAvance;
             _horlogeEnnemis.Start();
+
+            InitialiserNavires();
         }
 
         private void HorlogeMenuAvance(object sender, EventArgs e)
@@ -168,6 +171,37 @@ namespace TP3
             var menu = Jeu.Children.OfType<Views.Menu>().FirstOrDefault();
             Jeu.Children.Remove(menu);
             InitialiserJeu();
+        }
+
+        private void InitialiserNavires()
+        {
+            RotateTransform rotate = new RotateTransform(-90);
+
+            GalionEspagnole Galion1 = new GalionEspagnole();
+            Galion1.Tag = "1";
+            Canvas.SetLeft(Galion1, 40);
+            Canvas.SetTop(Galion1, 112);
+
+            EscorteEspagnole Escorte1 = new EscorteEspagnole();
+            Escorte1.Tag = "2";
+            Canvas.SetLeft(Escorte1, 737);
+            Canvas.SetTop(Escorte1, 176);
+            Escorte1.RenderTransform = rotate;
+
+            EscorteEspagnole Escorte2 = new EscorteEspagnole();
+            Escorte2.Tag = "3";
+            Canvas.SetLeft(Escorte2, 120);
+            Canvas.SetTop(Escorte2, 500);
+
+            EscorteEspagnole Escorte3 = new EscorteEspagnole();
+            Escorte3.Tag = "4";
+            Canvas.SetLeft(Escorte3, 1716);
+            Canvas.SetTop(Escorte3, 663);
+
+            Mer.Children.Add(Galion1);
+            Mer.Children.Add(Escorte1);
+            Mer.Children.Add(Escorte2);
+            Mer.Children.Add(Escorte3);
         }
 
         /// <summary>
